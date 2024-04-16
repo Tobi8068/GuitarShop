@@ -1,4 +1,5 @@
-import { CiUser,CiShoppingCart,CiHeart } from "react-icons/ci";
+import { CiUser,CiShoppingCart,CiHeart,CiSun  } from "react-icons/ci";
+import { ThemeSwitcher } from "./UI/ThemeSwitch";
 
 const NavbarComponent = () => {
     return (
@@ -11,11 +12,12 @@ const NavbarComponent = () => {
                 <input className='w-full shadow appearance-none border rounded py-2 px-3 dark:bg-inherit text-gray-700 dark:text-gray-300 leading-tight dark:border-gray-400 focus:outline-none focus:shadow-outline'
                     type="text" placeholder='Enter something to search' />
             </div>
-            <div className="hidden lg:flex items-center gap-2 dark:text-gray-300">
-                    <CiUser className="text-3xl cursor-pointer"/>
-                    <CiShoppingCart className="text-3xl cursor-pointer"/>
-                    <CiHeart className="text-3xl cursor-pointer"/>
-                </div>
+            <div className="hidden text-3xl lg:flex items-center gap-2 dark:text-gray-300">
+                    <CiUser className=" cursor-pointer"/>
+                    <CiShoppingCart className="cursor-pointer"/>
+                    <CiHeart className="cursor-pointer"/>
+                    <ThemeSwitcher/>
+            </div>
         </nav>
     )
 }

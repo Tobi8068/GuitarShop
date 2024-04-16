@@ -1,6 +1,7 @@
 import ProductCardLoader from '@/components/Loader/ProductCardLoader/ProductCardLoader'
 import ProductCard from '@/components/ProductCardComponent/ProductCard'
 import ProductCard2 from '@/components/ProductCardComponent/ProductCard2'
+import { ThemeSwitcher } from '@/components/UI/ThemeSwitch'
 
 const page = () => {
   return (
