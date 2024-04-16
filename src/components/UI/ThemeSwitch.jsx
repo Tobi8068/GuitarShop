@@ -1,4 +1,3 @@
-// app/components/ThemeSwitcher.tsx
 "use client";
 
 import {useTheme} from "next-themes";
@@ -8,7 +7,7 @@ import { PiMoonLight } from "react-icons/pi";
 
 export function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme('light')
+  const { theme, setTheme } = useTheme()
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');

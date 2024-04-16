@@ -1,7 +1,8 @@
 
 import Link from "next/link";
 import { ImCross } from "react-icons/im";
-const SideBarComponent = ({isSidebar,setIsSidebar}) => {
+import { ThemeSwitcher } from "../UI/ThemeSwitch";
+const SideBarComponent = ({ isSidebar, setIsSidebar }) => {
   return (
     isSidebar ? (
       <div className="w-5/6 h-full p-3 bg-white dark:bg-inherit fixed top-0 z-20 border-r border-gray-300 transform transition-transform duration-300 ease-in-out">
@@ -14,6 +15,10 @@ const SideBarComponent = ({isSidebar,setIsSidebar}) => {
           <li><Link href='/' onClick={() => setIsSidebar(false)} >About</Link></li>
           <li><Link href='/' onClick={() => setIsSidebar(false)} >Contact</Link></li>
           <li><Link href='/category' onClick={() => setIsSidebar(false)} >Category</Link></li>
+          <li className="flex items-center gap-2">
+            Mode:
+            <span className="text-2xl"><ThemeSwitcher /></span>
+          </li>
         </ul>
       </div>
     ) : null
