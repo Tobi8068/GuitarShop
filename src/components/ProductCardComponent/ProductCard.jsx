@@ -19,7 +19,7 @@ const ProductCard = () => {
 const ProductCardHeader = () =>{
   return (
     <div className="w-full aspect-square bg-gray-200 rounded">
-      <img src='/guitar.png' className="w-full h-full object-cover" ></img>
+      <img src='/guitar.jpg' className="w-full h-full object-cover" ></img>
     </div>
   )
 }
