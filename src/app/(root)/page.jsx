@@ -1,11 +1,13 @@
 import ProductCardLoader from '@/components/Loader/ProductCardLoader/ProductCardLoader'
-import ProductCard from '@/components/ProductCardComponent/ProductCard'
-import ProductListSlider from '@/components/ProductCardComponent/ProductListSlider'
+import ProductCard from '@/components/ProductComponent/ProductCard'
+import ProductListSlider from '@/components/ProductComponent/ProductListSlider'
+import BannerComponent from '@/components/RootComponent/BannerComponent'
 
 const page = () => {
 
   return (
     <>
+    <BannerComponent/>
     {/* Trending Component  */}
       <div className="w-full my-4 md:my-6 px-5  md:px-0 md:w-3/4 md:mx-auto">
         <h1 className='font-bold text-xl text-gray-600 dark:text-gray-300 md:text-2xl'>Trending</h1>
@@ -15,14 +17,15 @@ const page = () => {
         <ProductCard/>
         <ProductCard/>
         <ProductCard/>
-        
       </div>
      {/* Trending Component  */}
      {/* Deal of the day  */}
       <div className="w-full mt-4 md:my-6 px-5 md:px-0 md:w-3/4 md:mx-auto">
           <h1 className='font-bold text-xl text-gray-600 dark:text-gray-300 md:text-2xl'>Deal of the Day</h1>
-        </div>
+      </div>
+      <div className="w-full mt-3 px-5 md:px-3  md:w-3/4 md:mx-auto">
       <ProductListSlider/>
+      </div>
       {/* Deal of the day  */}
     </>
 
