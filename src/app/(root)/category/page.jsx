@@ -6,10 +6,10 @@ const page = () => {
     return (
         <>  
             <div className='w-full flex justify-between my-5 px-5 dark:text-gray-300 md:px-0 md:w-3/4 md:mx-auto'>
-                <div  className="flex w-5/12 bg-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:bg-inherit dark:border-2 dark:border-gray-700  transition-colors duration-300 ease-in  px-2 py-1 justify-between items-center cursor-pointer rounded md:w-auto md:mr-4">
+                <div  className="flex w-5/12 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-800 dark:bg-inherit dark:border-2 dark:border-gray-700  transition-colors duration-300 ease-in  px-2 py-1 justify-between items-center cursor-pointer rounded md:w-auto md:mr-4">
                     <span className='md:mr-2'>Sort By Price</span>
                 </div>
-                <div className="flex w-5/12 bg-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:bg-inherit dark:border-2 dark:border-gray-700  transition-colors duration-300 ease-in px-2 py-1 justify-between items-center cursor-pointer rounded md:w-auto">
+                <div className="flex w-5/12 bg-gray-200 hover:bg-gray-300 dark:hover:bg-gray-800 dark:bg-inherit dark:border-2 dark:border-gray-700  transition-colors duration-300 ease-in px-2 py-1 justify-between items-center cursor-pointer rounded md:w-auto">
                     <span className='md:mr-2'>Filter </span>
                     <FaFilter />
                 </div>

@@ -1,9 +1,9 @@
 import ProductCardLoader from '@/components/Loader/ProductCardLoader/ProductCardLoader'
 import ProductCard from '@/components/ProductCardComponent/ProductCard'
-import ProductCard2 from '@/components/ProductCardComponent/ProductCard2'
-import { ThemeSwitcher } from '@/components/UI/ThemeSwitch'
+import ProductListSlider from '@/components/ProductCardComponent/ProductListSlider'
 
 const page = () => {
+
   return (
     <>
     {/* Trending Component  */}
@@ -15,16 +15,14 @@ const page = () => {
         <ProductCard/>
         <ProductCard/>
         <ProductCard/>
+        
       </div>
      {/* Trending Component  */}
      {/* Deal of the day  */}
       <div className="w-full mt-4 md:my-6 px-5 md:px-0 md:w-3/4 md:mx-auto">
-        <h1 className='font-bold text-xl text-gray-600 dark:text-gray-300 md:text-2xl'>Deal of the Day</h1>
-      </div>
-      <div className='w-full mt-3 px-5 flex flex-col gap-2 md:gap-3 md:px-0 md:w-3/4 md:mx-auto lg:flex-row'>
-          <ProductCard2/>
-          <ProductCard2/>
-      </div>
+          <h1 className='font-bold text-xl text-gray-600 dark:text-gray-300 md:text-2xl'>Deal of the Day</h1>
+        </div>
+      <ProductListSlider/>
       {/* Deal of the day  */}
     </>
 
