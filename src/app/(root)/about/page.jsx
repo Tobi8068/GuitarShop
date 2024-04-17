@@ -2,10 +2,10 @@ import React from 'react'
 
 const about = () => {
   return (
-    <div className="w-full px-5 flex flex-col gap-2 my-6 md:my-6 md:px-0 md:w-3/4 md:flex-row md:mx-auto">
+    <div className="w-full px-5 flex flex-col gap-2 my-6 md:my-6 md:px-0 md:w-3/4 lg:flex-row md:mx-auto">
       {/* about us text part  */}
-      <div>
-        <h1 className='text-2xl font-semibold md:text-3xl'>About Us</h1>
+      <div className='md:p-2 lg:p-3'>
+        <h1 className='text-2xl font-bold md:text-3xl'>About Us</h1>
         <p className='mt-2 p-1 '>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda est molestiae voluptate quaerat similique accusantium dicta hic iusto molestias sed numquam maiores impedit omnis quia non inventore, saepe ipsa quo.
         </p>
