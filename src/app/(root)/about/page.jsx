@@ -4,12 +4,12 @@ const about = () => {
   return (
     <div className="w-full px-5 flex flex-col gap-2 my-6 md:my-6 md:px-0 md:w-3/4 lg:flex-row md:mx-auto">
       {/* about us text part  */}
-      <div className='md:p-2 lg:p-3'>
+      <div className='md:p-2 lg:p-3 text-justify'>
         <h1 className='text-2xl font-bold md:text-3xl'>About Us</h1>
-        <p className='mt-2 p-1 '>
+        <p className='mt-2  '>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda est molestiae voluptate quaerat similique accusantium dicta hic iusto molestias sed numquam maiores impedit omnis quia non inventore, saepe ipsa quo.
         </p>
-        <p className='mt-2 p-1'>
+        <p className='mt-2 '>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae dolorum fugiat nesciunt, consectetur nihil non illum recusandae consequatur eius sint molli
         </p>
         <h1 className='text-2xl mt-6 font-semibold'>Areas We Target</h1>
@@ -36,7 +36,7 @@ const about = () => {
             </span>
           </li>
         </ul>
-        <p className='mt-4 p-1'>
+        <p className='mt-4 '>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae dolorum fugiat nesciunt, consectetur illum recusandae consequatur eius sint molli
         </p>
       </div>
