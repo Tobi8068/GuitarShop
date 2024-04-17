@@ -9,7 +9,7 @@ const NavbarComponent2 = () => {
           <Link href='/'>Home</Link>
         </li>
         <li className='h-full flex items-center border-b-2 border-transparent transition-colors duration-300 hover:border-blue-600 cursor-pointer'>
-          <Link href='/category'>About</Link>
+          <Link href='/about'>About</Link>
         </li>
         <li className='h-full flex items-center border-b-2 border-transparent transition-colors duration-300 hover:border-blue-600 cursor-pointer'>
           <Link href='/category'>Contact</Link>

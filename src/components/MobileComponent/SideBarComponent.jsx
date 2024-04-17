@@ -12,7 +12,7 @@ const SideBarComponent = ({ isSidebar, setIsSidebar }) => {
         </div>
         <ul className="flex flex-col gap-3 mt-3 p-3 text-gray-600 dark:text-gray-400 text-lg font-semibold">
           <li><Link href='/' onClick={() => setIsSidebar(false)} >Home</Link></li>
-          <li><Link href='/' onClick={() => setIsSidebar(false)} >About</Link></li>
+          <li><Link href='/about' onClick={() => setIsSidebar(false)} >About</Link></li>
           <li><Link href='/' onClick={() => setIsSidebar(false)} >Contact</Link></li>
           <li><Link href='/category' onClick={() => setIsSidebar(false)} >Category</Link></li>
           <li className="flex items-center gap-2">
