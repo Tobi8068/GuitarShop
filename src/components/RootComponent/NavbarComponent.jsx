@@ -1,5 +1,5 @@
 import { CiUser,CiShoppingCart,CiHeart,CiSun  } from "react-icons/ci";
-import { ThemeSwitcher } from "./UI/ThemeSwitch";
+import { ThemeSwitcher } from "../UI/ThemeSwitch";
 
 const NavbarComponent = () => {
     return (

@@ -1,5 +1,5 @@
-import FooterComponent from "@/components/FooterComponent";
-import HeaderComponent from "@/components/HeaderComponent";
+import FooterComponent from "@/components/RootComponent/FooterComponent";
+import HeaderComponent from "@/components/RootComponent/HeaderComponent";
 import MobileComponent from "@/components/MobileComponent/MobileComponent";
 
 
