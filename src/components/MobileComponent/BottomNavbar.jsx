@@ -10,9 +10,7 @@ const BottomNavbar = ({setIsSidebar}) => {
         <Link href='/'><CiHome className="text-3xl cursor-pointer"/></Link>
         <CiHeart className="text-3xl cursor-pointer"/>
         <CiUser className="text-3xl cursor-pointer"/>
-
     </div>
-    
   )
 }
 
