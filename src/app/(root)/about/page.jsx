@@ -6,14 +6,14 @@ const about = () => {
       {/* about us text part  */}
       <div className='md:p-2 lg:p-3 text-justify'>
         <h1 className='text-2xl font-bold md:text-3xl'>About Us</h1>
-        <p className='mt-2  '>
+        <p className='mt-2  dark:text-gray-400'>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda est molestiae voluptate quaerat similique accusantium dicta hic iusto molestias sed numquam maiores impedit omnis quia non inventore, saepe ipsa quo.
         </p>
-        <p className='mt-2 '>
+        <p className='mt-2 dark:text-gray-400'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae dolorum fugiat nesciunt, consectetur nihil non illum recusandae consequatur eius sint molli
         </p>
         <h1 className='text-2xl mt-6 font-semibold'>Areas We Target</h1>
-        <ul className="list-none mt-2 pr-3 pl-1 flex flex-col">
+        <ul className="list-none mt-2 pr-3 pl-1 flex flex-col dark:text-gray-400">
           <li className="flex mb-1">
             <span className="mr-2">●</span>
             <span>
@@ -36,7 +36,7 @@ const about = () => {
             </span>
           </li>
         </ul>
-        <p className='mt-4 '>
+        <p className='mt-4 dark:text-gray-400'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae dolorum fugiat nesciunt, consectetur illum recusandae consequatur eius sint molli
         </p>
       </div>
