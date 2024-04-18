@@ -1,4 +1,3 @@
-import ProductCardLoader from '@/components/Loader/ProductCardLoader/ProductCardLoader'
 import ProductCard from '@/components/ProductComponent/ProductCard'
 import ProductListSlider from '@/components/ProductComponent/ProductListSlider'
 import BannerComponent from '@/components/RootComponent/BannerComponent'
@@ -25,6 +24,7 @@ const page = () => {
       </div>
       <div className="w-full mt-3 px-5 md:px-3  md:w-3/4 md:mx-auto">
       <ProductListSlider/>
+    
       </div>
       {/* Deal of the day  */}
     </>
