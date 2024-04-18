@@ -1,5 +1,6 @@
 import { CiUser,CiShoppingCart,CiHeart,CiSun  } from "react-icons/ci";
 import { ThemeSwitcher } from "../UI/ThemeSwitch";
+import Link from "next/link";
 
 const NavbarComponent = () => {
     return (
@@ -14,7 +15,9 @@ const NavbarComponent = () => {
             </div>
             <div className="hidden text-3xl lg:flex items-center gap-2 dark:text-gray-300">
                     <CiUser className=" cursor-pointer"/>
-                    <CiShoppingCart className="cursor-pointer"/>
+                    <Link href='/cart'>
+                        <CiShoppingCart className="cursor-pointer"/>
+                    </Link>
                     <CiHeart className="cursor-pointer"/>
                     <ThemeSwitcher/>
             </div>

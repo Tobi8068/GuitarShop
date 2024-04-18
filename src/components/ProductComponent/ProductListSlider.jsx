@@ -63,14 +63,14 @@ const ProductListSlider = () => {
   return (
     <>
          {/* Deal of the day  */}
-      <div className="w-full mt-3 px-5 md:px-3  md:w-3/4 md:mx-auto">
+    
       <Slider {...settings}>
         <ProductCard2/>
         <ProductCard2/>
         <ProductCard2/>
         <ProductCard2/>
       </Slider>
-    </div>
+   
       {/* Deal of the day  */}
     </>
   )

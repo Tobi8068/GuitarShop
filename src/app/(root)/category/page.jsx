@@ -1,10 +1,12 @@
-import ProductCard from '@/components/ProductCardComponent/ProductCard'
+import ProductCard from '@/components/ProductComponent/ProductCard'
 import { FaSort,FaSortUp,FaSortDown, FaFilter } from "react-icons/fa";
 import React from 'react'
+import BannerComponent from '@/components/RootComponent/BannerComponent';
 
 const page = () => {
     return (
         <>  
+            <BannerComponent/>
             <CategoryHeader/>
             <div className="w-full  mt-1 px-5 grid grid-cols-2 gap-2 md:px-0 md:w-3/4 md:mx-auto lg:grid-cols-4 md:gap-4 ">
                 <ProductCard />
