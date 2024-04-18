@@ -3,32 +3,32 @@ import ServiceComponent from "@/components/Design/ServiceComponent";
 const Services = () => {
   const services = [
     {
-      service: "Expert Consultation",
-      description: "Receive personalized advice from guitar specialists to choose the ideal instrument based on skill level, musical style, and budget.",
+      title: "Expert Consultation",
+      description: "Receive personalized advice from guitar specialists to choose the ideal instrument based on skill level, and budget.",
       icon: "GrUserExpert"
     },
     {
-      service: "Customization Options",
+      title: "Customization Options",
       description: "Customize guitars to reflect individuality by modifying finish, hardware, and electronics.",
       icon: "GiGuitarBassHead"
     },
     {
-      service: "Professional Setup",
+      title: "Professional Setup",
       description: "Ensure optimal playability, tone, and intonation with precision instrument setup performed by skilled technicians.",
       icon: "MdOutlineDashboardCustomize"
     },
     {
-      service: "Convenient Financing",
+      title: "Convenient Financing",
       description: "Spread the cost of purchases with flexible financing options, making high-quality guitars accessible to all budgets.",
       icon: "FaMoneyCheck"
     },
     {
-      service: "Comprehensive Warranty",
+      title: "Comprehensive Warranty",
       description: "Protect investments with comprehensive warranty coverage against defects in materials and workmanship.",
       icon: "MdOutlineSecurity"
     },
     {
-      service: "Educational Resources",
+      title: "Educational Resources",
       description: "Access tutorials, tips, and guides to enhance playing skills, instrument maintenance, and overall musical journey.",
       icon: "FaGoogleScholar"
     }

@@ -16,7 +16,7 @@ const iconMap = {
 const ServiceComponent = ({service}) => {
 const IconComponent = iconMap[service.icon];
   return (
-    <div className="p-10 flex flex-col items-center text-center lg:aspect-square lg:justify-center  dark:border-gray-700 dark:border-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+    <div className="p-10 flex flex-col items-center text-center aspect-square justify-center md:p-6 lg:p-10  dark:border-gray-700 dark:border-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
     <IconComponent className="text-3xl mb-4 lg:mb-10 lg:text-4xl"  /> 
     <h1 className="text-xl font-bold mb-4 ">{service.title}</h1>
     <p className="text-gray-500 dark:text-gray-400 font-semibold">
