@@ -1,4 +1,4 @@
-import ProductCard from "@/components/ProductComponent/ProductCard"
+import ProductCard from "@/components/Design/ProductComponent/ProductCard"
 
 const Wishlist = () => {
     return (

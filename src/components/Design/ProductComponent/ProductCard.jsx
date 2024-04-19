@@ -1,4 +1,4 @@
-import AddToCartBtn from "../hero/AddToCartBtn"
+import AddToCartBtn from "../../hero/AddToCartBtn"
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 

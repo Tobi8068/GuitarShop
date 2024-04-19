@@ -1,4 +1,4 @@
-import ProductCard from '@/components/ProductComponent/ProductCard'
+import ProductCard from '@/components/Design/ProductComponent/ProductCard'
 import { FaSort,FaSortUp,FaSortDown, FaFilter } from "react-icons/fa";
 import React from 'react'
 import BannerComponent from '@/components/RootComponent/BannerComponent';

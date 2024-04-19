@@ -1,5 +1,5 @@
-import ProductCard from '@/components/ProductComponent/ProductCard'
-import ProductListSlider from '@/components/ProductComponent/ProductListSlider'
+import ProductCard from '@/components/Design/ProductComponent/ProductCard'
+import ProductListSlider from '@/components/Design/ProductComponent/ProductListSlider'
 import BannerComponent from '@/components/RootComponent/BannerComponent'
 
 const page = () => {

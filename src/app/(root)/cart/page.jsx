@@ -1,5 +1,5 @@
-import CartComponent from "@/components/CartComponent/CartComponent";
-import CheckOutComponent from "@/components/CartComponent/CheckOutComponent";
+import CartComponent from "@/components/Design/CartComponent/CartComponent";
+import CheckOutComponent from "@/components/Design/CartComponent/CheckOutComponent";
 
 function Index() {
   return (

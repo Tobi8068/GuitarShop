@@ -1,6 +1,6 @@
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
-import AddToCartBtn2 from "../hero/AddToCartBtn2";
+import AddToCartBtn2 from "../../hero/AddToCartBtn2";
 
 const ProductCard2 = () => {
     return (
