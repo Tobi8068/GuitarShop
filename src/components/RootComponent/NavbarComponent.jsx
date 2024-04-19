@@ -18,7 +18,9 @@ const NavbarComponent = () => {
                     <Link href='/cart'>
                         <CiShoppingCart className="cursor-pointer"/>
                     </Link>
-                    <CiHeart className="cursor-pointer"/>
+                    <Link href='/wishlist'>
+                        <CiHeart className="cursor-pointer"/>
+                    </Link>
                     <ThemeSwitcher/>
             </div>
         </nav>

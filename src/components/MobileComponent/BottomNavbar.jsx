@@ -8,7 +8,7 @@ const BottomNavbar = ({setIsSidebar}) => {
         <RxHamburgerMenu onClick={()=>{setIsSidebar(true)}} className="text-2xl cursor-pointer"/>
         <Link href='/cart'><CiShoppingCart className="text-3xl cursor-pointer"/></Link>
         <Link href='/'><CiHome className="text-3xl cursor-pointer"/></Link>
-        <CiHeart className="text-3xl cursor-pointer"/>
+        <Link href='/wishlist'><CiHeart className="text-3xl cursor-pointer"/></Link>
         <CiUser className="text-3xl cursor-pointer"/>
     </div>
   )
