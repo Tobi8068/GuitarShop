@@ -14,7 +14,10 @@ const NavbarComponent = () => {
                     type="text" placeholder='Enter something to search' />
             </div>
             <div className="hidden text-3xl lg:flex items-center gap-2 dark:text-gray-300">
-                    <CiUser className=" cursor-pointer"/>
+                    <Link href='/profile'>
+                        <CiUser className=" cursor-pointer"/>
+                    </Link>
+                    
                     <Link href='/cart'>
                         <CiShoppingCart className="cursor-pointer"/>
                     </Link>
