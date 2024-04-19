@@ -9,7 +9,7 @@ const BottomNavbar = ({setIsSidebar}) => {
         <Link href='/cart'><CiShoppingCart className="text-3xl cursor-pointer"/></Link>
         <Link href='/'><CiHome className="text-3xl cursor-pointer"/></Link>
         <Link href='/wishlist'><CiHeart className="text-3xl cursor-pointer"/></Link>
-        <CiUser className="text-3xl cursor-pointer"/>
+        <Link href='/profile'><CiUser className="text-3xl cursor-pointer"/></Link>
     </div>
   )
 }
