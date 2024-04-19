@@ -1,4 +1,4 @@
-import { CiUser,CiShoppingCart,CiHeart,CiSun  } from "react-icons/ci";
+import { CiUser,CiShoppingCart,CiHeart  } from "react-icons/ci";
 import { ThemeSwitcher } from "../UI/ThemeSwitch";
 import Link from "next/link";
 
