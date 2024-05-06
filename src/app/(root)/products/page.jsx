@@ -25,7 +25,7 @@ const page = ({ searchParams }) => {
 
     useEffect(() => {
         dispatch(fetchProducts(`product?page=${currPage}`))
-    }, [])
+    }, [currPage])
 
     return (
         <>
@@ -45,16 +45,18 @@ const page = ({ searchParams }) => {
 }
 
 const CategoryHeader = () => {
-    const [dropdown,showDropDown] = useState(false)
-    
+    const [dropdown,setDropdown] = useState(false)
+    const toggleDropDown = () =>{
+        setDropdown(!dropdown)
+    }
     return (
         <div className='w-full flex justify-between my-5 px-5 dark:text-gray-300 md:px-0 md:w-3/4 md:mx-auto'>
             <div className="relative inline-block text-left bg-gray-100 dark:bg-inherit dark:border-2 dark:border-gray-700  transition-colors duration-300 ease-in px-2 py-1 justify-between items-center cursor-pointer rounded md:w-auto
             shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
-                <div>
+                <div  onClick={toggleDropDown} >
                     Sort By: Default
                 </div>
-                {dropdown && <DropDown showDropDown={showDropDown} />}
+                {dropdown && <DropDown setDropdown={setDropdown} />}
             </div>
             <div className="flex w-5/12 bg-gray-100 hover:bg-gray-200 dark:hover:bg-gray-800 dark:bg-inherit dark:border-2 dark:border-gray-700  transition-colors duration-300 ease-in px-2 py-1 justify-between items-center cursor-pointer rounded md:w-auto
             shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]
