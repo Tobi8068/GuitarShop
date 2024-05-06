@@ -1,30 +1,60 @@
+'use client';
 import ProductCard from '@/components/Design/ProductComponent/ProductCard'
-import { FaSort,FaSortUp,FaSortDown, FaFilter } from "react-icons/fa";
-import React from 'react'
+import { FaSort, FaSortUp, FaSortDown, FaFilter } from "react-icons/fa";
+import React, { useEffect, useState } from 'react'
 import BannerComponent from '@/components/RootComponent/BannerComponent';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { fetchProducts } from '@/lib/features/product';
+import Link from 'next/link';
 
-const page = () => {
+
+const page = ({ searchParams }) => {
+    const dispatch = useAppDispatch()
+    const products = useAppSelector((state) => state.product)
+    let currPage = 1;
+    if (searchParams.page > 1) {
+        currPage = Number(searchParams.page)
+    }
+
+    let pgNos = []
+    for (let index = currPage - 2; index < currPage + 2; index++) {
+        if (index < 1) continue
+        if (index > products.totalPages) break;
+        pgNos.push(index)
+    }
+
+    useEffect(() => {
+        dispatch(fetchProducts(`product?page=${currPage}`))
+    }, [])
+
     return (
-        <>  
-            <BannerComponent/>
-            <CategoryHeader/>
-            <div className="w-full  mt-1 px-5 grid grid-cols-2 gap-2 md:px-0 md:w-3/4 md:mx-auto lg:grid-cols-4 md:gap-4 ">
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
+        <>
+            <BannerComponent />
+            <CategoryHeader />
+            <div className="w-full  mt-1 mb-10 px-5 grid grid-cols-2 gap-2 md:px-0 md:w-3/4 md:mx-auto lg:grid-cols-4 md:gap-4 ">
+                {products.data.map((product, index) => (
+                    <ProductCard key={index} product={product} />
+                ))}
             </div>
+            <div className='w-full font-semibold flex justify-center px-5 gap-2  md:px-0 md:w-3/4 md:mx-auto md:gap-3 '>
+                <PageNumber pgNos={pgNos} />
+            </div>
+
         </>
     )
 }
 
-const CategoryHeader = () =>{
+const CategoryHeader = () => {
+    const [dropdown,showDropDown] = useState(false)
+    
     return (
         <div className='w-full flex justify-between my-5 px-5 dark:text-gray-300 md:px-0 md:w-3/4 md:mx-auto'>
-            <div  className="flex w-5/12 bg-gray-100 hover:bg-gray-200 dark:hover:bg-gray-800 dark:bg-inherit dark:border-2 dark:border-gray-700  transition-colors duration-300 ease-in  px-2 py-1 justify-between items-center cursor-pointer rounded md:w-auto md:mr-4
-                shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]
-            ">
-                <span className='md:mr-2'>Sort By Price</span>
+            <div className="relative inline-block text-left bg-gray-100 dark:bg-inherit dark:border-2 dark:border-gray-700  transition-colors duration-300 ease-in px-2 py-1 justify-between items-center cursor-pointer rounded md:w-auto
+            shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+                <div>
+                    Sort By: Default
+                </div>
+                {dropdown && <DropDown showDropDown={showDropDown} />}
             </div>
             <div className="flex w-5/12 bg-gray-100 hover:bg-gray-200 dark:hover:bg-gray-800 dark:bg-inherit dark:border-2 dark:border-gray-700  transition-colors duration-300 ease-in px-2 py-1 justify-between items-center cursor-pointer rounded md:w-auto
             shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]
@@ -36,6 +66,28 @@ const CategoryHeader = () =>{
     )
 
 
+}
+
+const DropDown = () =>{
+    return (
+        <div className="absolute left-0 z-10 mt-3 -ml-1 w-56 origin-top-right rounded-md bg-white dark:bg-gray-900 shadow-lg dark:border-gray-700 border-2" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
+                    <div className="py-1" role="none">
+                        <span className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-0">Default</span>
+                        <span className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-1">Ascending</span>
+                        <span className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-2">Descending</span>
+                    </div>
+        </div>
+    )
+}
+
+const PageNumber = ({ pgNos }) => {
+    return (
+        <>
+            {pgNos.map((pg, index) => <Link key={index} href={`products?page=${pg}`}>
+                {pg}
+            </Link>)}
+        </>
+    )
 }
 
 export default page
