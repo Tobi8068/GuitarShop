@@ -6,6 +6,7 @@ import BannerComponent from '@/components/RootComponent/BannerComponent';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { fetchProducts } from '@/lib/features/product';
 import Link from 'next/link';
+import FilterPopup from '@/components/Design/PopupComponent/FilterPopup';
 
 
 const page = ({ searchParams }) => {
@@ -46,7 +47,9 @@ const page = ({ searchParams }) => {
 
 const CategoryHeader = () => {
     const [sortOrder,setSortOrder] = useState('Default')
+    const [showModal, setShowModal] = useState(false);
     const [dropdown,setDropdown] = useState(false)
+
     const toggleDropDown = () =>{
         setDropdown(!dropdown)
     }
@@ -66,10 +69,12 @@ const CategoryHeader = () => {
             </div>
             <div className="flex w-5/12 bg-gray-100 hover:bg-gray-200 dark:hover:bg-gray-800 dark:bg-inherit dark:border-2 dark:border-gray-700  transition-colors duration-300 ease-in px-2 py-1 justify-between items-center cursor-pointer rounded md:w-auto
             shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]
-            ">
+            " onClick={() => setShowModal(true)} >
                 <span className='md:mr-2'>Filter </span>
                 <FaFilter />
             </div>
+             {/* contains the popup modal  */}
+            {showModal && <FilterPopup setShowModal={setShowModal} />}
         </div>
     )
 
