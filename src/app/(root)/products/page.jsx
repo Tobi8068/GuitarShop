@@ -45,8 +45,13 @@ const page = ({ searchParams }) => {
 }
 
 const CategoryHeader = () => {
+    const [sortOrder,setSortOrder] = useState('Default')
     const [dropdown,setDropdown] = useState(false)
     const toggleDropDown = () =>{
+        setDropdown(!dropdown)
+    }
+    const sortProduct = (order) =>{
+        setSortOrder(order)
         setDropdown(!dropdown)
     }
     return (
@@ -54,9 +59,10 @@ const CategoryHeader = () => {
             <div className="relative inline-block text-left bg-gray-100 dark:bg-inherit dark:border-2 dark:border-gray-700  transition-colors duration-300 ease-in px-2 py-1 justify-between items-center cursor-pointer rounded md:w-auto
             shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
                 <div  onClick={toggleDropDown} >
-                    Sort By: Default
+                    Sort By: 
+                    <span className='ml-1 font-semibold'>{sortOrder}</span>
                 </div>
-                {dropdown && <DropDown setDropdown={setDropdown} />}
+                {dropdown && <DropDown sortProduct={sortProduct}  />}
             </div>
             <div className="flex w-5/12 bg-gray-100 hover:bg-gray-200 dark:hover:bg-gray-800 dark:bg-inherit dark:border-2 dark:border-gray-700  transition-colors duration-300 ease-in px-2 py-1 justify-between items-center cursor-pointer rounded md:w-auto
             shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]
@@ -70,14 +76,14 @@ const CategoryHeader = () => {
 
 }
 
-const DropDown = () =>{
+const DropDown = ({sortProduct}) =>{
     return (
         <div className="absolute left-0 z-10 mt-3 -ml-1 w-56 origin-top-right rounded-md bg-white dark:bg-gray-900 shadow-lg dark:border-gray-700 border-2" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
-                    <div className="py-1" role="none">
-                        <span className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-0">Default</span>
-                        <span className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-1">Ascending</span>
-                        <span className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-2">Descending</span>
-                    </div>
+            <div className="py-1" role="none">
+                <span onClick={()=>{sortProduct('Default')}} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-0">Default</span>
+                <span onClick={()=>{sortProduct('Ascending')}} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-1">Ascending</span>
+                <span onClick={()=>{sortProduct('Descending')}} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-2">Descending</span>
+            </div>
         </div>
     )
 }
