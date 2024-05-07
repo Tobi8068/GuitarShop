@@ -13,7 +13,7 @@ export const fetchProducts = createAsyncThunk('fetchProducts',async (url)=>{
 const initialState={
     data: [],
     singleProductData :{},
-    message: null,
+    isLoading:true,
     error: null,
     status: "idle",
     totalPages: 1,
