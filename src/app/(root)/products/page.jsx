@@ -1,6 +1,6 @@
 'use client';
 import ProductCard from '@/components/Design/ProductComponent/ProductCard'
-import { FaSort, FaSortUp, FaSortDown, FaFilter } from "react-icons/fa";
+import { FaFilter } from "react-icons/fa";
 import React, { useEffect, useState } from 'react'
 import BannerComponent from '@/components/RootComponent/BannerComponent';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
