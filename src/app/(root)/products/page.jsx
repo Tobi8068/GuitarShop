@@ -9,8 +9,8 @@ import Link from 'next/link';
 import FilterPopup from '@/components/Design/PopupComponent/FilterPopup';
 import ProductCardLoader from '@/components/Loader/ProductCardLoader/ProductCardLoader';
 
-
 const page = ({ searchParams }) => {
+    const [sortOrder, setSortOrder] = useState({term:'def',sort:'default'})
     const dispatch = useAppDispatch()
     const products = useAppSelector((state) => state.product)
     let currPage = 1;
@@ -26,13 +26,13 @@ const page = ({ searchParams }) => {
     }
 
     useEffect(() => {
-        dispatch(fetchProducts(`product?page=${currPage}`))
-    }, [currPage])
+        dispatch(fetchProducts(`product?page=${currPage}&sort=${sortOrder.term}`))
+    }, [currPage,sortOrder])
 
     return (
         <>
             <BannerComponent />
-            <CategoryHeader />
+            <CategoryHeader sortOrder={sortOrder} setSortOrder={setSortOrder} />
             <div className="w-full  mt-1 mb-10 px-5 grid grid-cols-2 gap-2 md:px-0 md:w-3/4 md:mx-auto lg:grid-cols-4 md:gap-4 ">
                 {products.isLoading ? (
                     // Show loading indicator
@@ -45,23 +45,23 @@ const page = ({ searchParams }) => {
                 )}
             </div>
             <div className='w-full font-semibold flex justify-center px-5 gap-2  md:px-0 md:w-3/4 md:mx-auto md:gap-3 '>
-                <PageNumber pgNos={pgNos} />
+                <PageNumber pgNos={pgNos} sortOrder={sortOrder} searchParams={searchParams} />
             </div>
 
         </>
     )
 }
 
-const CategoryHeader = () => {
-    const [sortOrder, setSortOrder] = useState('Default')
+const CategoryHeader = ({sortOrder,setSortOrder}) => {
+ 
     const [showModal, setShowModal] = useState(false);
     const [dropdown, setDropdown] = useState(false)
 
     const toggleDropDown = () => {
         setDropdown(!dropdown)
     }
-    const sortProduct = (order) => {
-        setSortOrder(order)
+    const sortProduct = (sort) => {
+        setSortOrder(sort)
         setDropdown(!dropdown)
     }
     return (
@@ -70,7 +70,7 @@ const CategoryHeader = () => {
             shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
                 <div onClick={toggleDropDown} >
                     Sort By:
-                    <span className='ml-1 font-semibold'>{sortOrder}</span>
+                    <span className='ml-1 font-semibold'>{sortOrder.sort}</span>
                 </div>
                 {dropdown && <DropDown sortProduct={sortProduct} />}
             </div>
@@ -92,22 +92,28 @@ const DropDown = ({ sortProduct }) => {
     return (
         <div className="absolute left-0 z-10 mt-3 -ml-1 w-56 origin-top-right rounded-md bg-white dark:bg-gray-900 shadow-lg dark:border-gray-700 border-2" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
             <div className="py-1" role="none">
-                <span onClick={() => { sortProduct('Default') }} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-0">Default</span>
-                <span onClick={() => { sortProduct('Ascending') }} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-1">Ascending</span>
-                <span onClick={() => { sortProduct('Descending') }} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-2">Descending</span>
+                <span onClick={() => { sortProduct({term:'def',sort:'Default'}) }} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-0">Default</span>
+                <span onClick={() => { sortProduct({term:'asc',sort:'Ascending'}) }} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-1">Ascending</span>
+                <span onClick={() => { sortProduct({term:'desc',sort:'Descending'}) }} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-2">Descending</span>
             </div>
         </div>
     )
 }
 
-const PageNumber = ({ pgNos }) => {
+const PageNumber = ({ pgNos, searchParams }) => {
+    const currentPage = searchParams.page ? parseInt(searchParams.page) : 1;
+
     return (
         <>
-            {pgNos.map((pg, index) => <Link key={index} href={`products?page=${pg}`}>
-                {pg}
-            </Link>)}
+            {pgNos.map((pg, index) => (
+                <Link key={index} href={`products?page=${pg}`}>
+                    <span className={`${(!searchParams.page && pg === 1) || (searchParams.page && currentPage === pg) ? 'text-red-400' : ' text-gray-700'}`}>
+                        {pg}
+                    </span>
+                </Link>
+            ))}
         </>
-    )
-}
+    );
+};
 
 export default page
