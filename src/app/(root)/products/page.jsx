@@ -10,7 +10,9 @@ import FilterPopup from '@/components/Design/PopupComponent/FilterPopup';
 import ProductCardLoader from '@/components/Loader/ProductCardLoader/ProductCardLoader';
 
 const page = ({ searchParams }) => {
-    const [sortOrder, setSortOrder] = useState({term:'def',sort:'default'})
+    const [sortOrder, setSortOrder] = useState({term:'def',sort:'Default'})
+    const [minPrice, setMinPrice] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
     const dispatch = useAppDispatch()
     const products = useAppSelector((state) => state.product)
     let currPage = 1;
@@ -26,13 +28,19 @@ const page = ({ searchParams }) => {
     }
 
     useEffect(() => {
-        dispatch(fetchProducts(`product?page=${currPage}&sort=${sortOrder.term}`))
+        dispatch(fetchProducts({ url: `product?page=${currPage}&sort=${sortOrder.term}`, minPrice, maxPrice }))
     }, [currPage,sortOrder])
+
+    const handleFilter = () =>{
+        dispatch(fetchProducts({ url: `product?sort=${sortOrder.term}`, minPrice, maxPrice }))
+    }
 
     return (
         <>
             <BannerComponent />
-            <CategoryHeader sortOrder={sortOrder} setSortOrder={setSortOrder} />
+            <CategoryHeader sortOrder={sortOrder} setSortOrder={setSortOrder} 
+            minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} handleFilter={handleFilter}
+            />
             <div className="w-full  mt-1 mb-10 px-5 grid grid-cols-2 gap-2 md:px-0 md:w-3/4 md:mx-auto lg:grid-cols-4 md:gap-4 ">
                 {products.isLoading ? (
                     // Show loading indicator
@@ -52,7 +60,7 @@ const page = ({ searchParams }) => {
     )
 }
 
-const CategoryHeader = ({sortOrder,setSortOrder}) => {
+const CategoryHeader = ({sortOrder,setSortOrder,minPrice,setMinPrice,maxPrice,setMaxPrice,handleFilter}) => {
  
     const [showModal, setShowModal] = useState(false);
     const [dropdown, setDropdown] = useState(false)
@@ -81,7 +89,9 @@ const CategoryHeader = ({sortOrder,setSortOrder}) => {
                 <FaFilter />
             </div>
             {/* contains the popup modal  */}
-            {showModal && <FilterPopup setShowModal={setShowModal} />}
+            {showModal && <FilterPopup setShowModal={setShowModal} 
+            minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} handleFilter={handleFilter}
+            />}
         </div>
     )
 
@@ -107,7 +117,7 @@ const PageNumber = ({ pgNos, searchParams }) => {
         <>
             {pgNos.map((pg, index) => (
                 <Link key={index} href={`products?page=${pg}`}>
-                    <span className={`${(!searchParams.page && pg === 1) || (searchParams.page && currentPage === pg) ? 'text-red-400' : ' text-gray-700'}`}>
+                    <span className={`${(!searchParams.page && pg === 1) || (searchParams.page && currentPage === pg) ? 'text-red-400  dark:text-white' : ' text-gray-700 dark:text-gray-500'}`}>
                         {pg}
                     </span>
                 </Link>

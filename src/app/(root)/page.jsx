@@ -10,7 +10,7 @@ const page = () => {
   const dispatch = useAppDispatch()
   const products = useAppSelector((state) => state.product)
   useEffect(() => {
-    dispatch(fetchProducts('product'))
+    dispatch(fetchProducts({ url: `product`, minPrice:'', maxPrice:'' }))
 }, [])
   return (
     <>

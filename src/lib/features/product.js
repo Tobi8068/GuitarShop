@@ -1,9 +1,25 @@
 import API from "@/config/config";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchProducts = createAsyncThunk('fetchProducts',async (url)=>{
+export const fetchProducts = createAsyncThunk('fetchProducts',async ({ url, minPrice, maxPrice })=>{
     try {
-        const response = await API.get(url)
+         // Initialize an empty array to store query parameters
+         const queryParams = [];
+
+         // Check if minPrice is provided and add it to the queryParams array
+         if (minPrice !== '') {
+             queryParams.push(`minPrice=${minPrice}`);
+         }
+ 
+         // Check if maxPrice is provided and add it to the queryParams array
+         if (maxPrice !== '') {
+             queryParams.push(`maxPrice=${maxPrice}`);
+         }
+ 
+         // Construct the URL with query parameters if any
+         const fullUrl = queryParams.length > 0 ? `${url}&${queryParams.join('&')}` : url;
+         console.log(fullUrl);
+        const response = await API.get(fullUrl)
         return response.data;
     } catch (error) {
         console.log(error);
