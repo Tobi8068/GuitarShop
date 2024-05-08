@@ -80,14 +80,14 @@ const FilterPopupForm = ({ minPrice, setMinPrice, maxPrice, setMaxPrice,selected
                 </label>
                 <div className="mb-4 flex gap-2 justify-center">
                     {categories.data.map(category => (
-                        <div key={category._id} className={`py-1 px-2 border-2 rounded transition ease-in ${selectedCategories.includes(category._id) ? 'border-black' : ''}`}>
+                        <div key={category._id} className={`py-1 px-2 cursor-pointer border-2 dark:border-gray-500 rounded transition ease-in ${selectedCategories.includes(category._id) ? 'border-black dark:border-white' : ''}`}>
                             <input
                                 type="checkbox" hidden
                                 id={category._id}
                                 checked={selectedCategories.includes(category._id)}
                                 onChange={() => handleCategoryChange(category._id)}
                             />
-                            <label htmlFor={category._id}>{category.category_name}</label>
+                            <label className="cursor-pointer" htmlFor={category._id}>{category.category_name}</label>
                         </div>
                     ))}
                 </div>
