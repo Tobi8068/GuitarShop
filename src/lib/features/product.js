@@ -32,6 +32,15 @@ export const fetchProducts = createAsyncThunk('fetchProducts',async ({ url, minP
     }
 })
 
+export const fetchSingleProduct = createAsyncThunk('fetchSingleProduct',async (id)=>{
+    try {
+        const response = await API.get(`product/${id}`)
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 const initialState={
     data: [],
     singleProductData :{},
@@ -56,6 +65,17 @@ const productSlice = createSlice({
             state.totalPages = action.payload.totalPages
         });
         builder.addCase(fetchProducts.rejected,(state,action)=>{
+            state.isLoading= false,
+            state.error= true
+        });
+        builder.addCase(fetchSingleProduct.pending,(state,action)=>{
+            state.isLoading= true
+        });
+        builder.addCase(fetchSingleProduct.fulfilled,(state,action)=>{
+            state.isLoading= false,
+            state.singleProductData = action.payload
+        });
+        builder.addCase(fetchSingleProduct.rejected,(state,action)=>{
             state.isLoading= false,
             state.error= true
         });
