@@ -13,6 +13,7 @@ const page = ({ searchParams }) => {
     const [sortOrder, setSortOrder] = useState({term:'def',sort:'Default'})
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
+    const [selectedCategories, setSelectedCategories] = useState([]);
     const dispatch = useAppDispatch()
     const products = useAppSelector((state) => state.product)
     let currPage = 1;
@@ -21,25 +22,27 @@ const page = ({ searchParams }) => {
     }
 
     let pgNos = []
-    for (let index = currPage - 2; index < currPage + 2; index++) {
+    for (let index = currPage - 3; index < currPage + 3; index++) {
         if (index < 1) continue
         if (index > products.totalPages) break;
         pgNos.push(index)
     }
 
     useEffect(() => {
-        dispatch(fetchProducts({ url: `product?page=${currPage}&sort=${sortOrder.term}`, minPrice, maxPrice }))
+        dispatch(fetchProducts({ url: `product?page=${currPage}&sort=${sortOrder.term}`, minPrice, maxPrice, category:selectedCategories }))
     }, [currPage,sortOrder])
 
     const handleFilter = () =>{
-        dispatch(fetchProducts({ url: `product?sort=${sortOrder.term}`, minPrice, maxPrice }))
+        dispatch(fetchProducts({ url: `product?sort=${sortOrder.term}`, minPrice, maxPrice, category:selectedCategories }))
     }
 
     return (
         <>
             <BannerComponent />
             <CategoryHeader sortOrder={sortOrder} setSortOrder={setSortOrder} 
-            minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} handleFilter={handleFilter}
+            minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice}
+            selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}
+            handleFilter={handleFilter}
             />
             <div className="w-full  mt-1 mb-10 px-5 grid grid-cols-2 gap-2 md:px-0 md:w-3/4 md:mx-auto lg:grid-cols-4 md:gap-4 ">
                 {products.isLoading ? (
@@ -60,7 +63,7 @@ const page = ({ searchParams }) => {
     )
 }
 
-const CategoryHeader = ({sortOrder,setSortOrder,minPrice,setMinPrice,maxPrice,setMaxPrice,handleFilter}) => {
+const CategoryHeader = ({sortOrder,setSortOrder,minPrice,setMinPrice,maxPrice,setMaxPrice,selectedCategories, setSelectedCategories,handleFilter}) => {
  
     const [showModal, setShowModal] = useState(false);
     const [dropdown, setDropdown] = useState(false)
@@ -91,6 +94,7 @@ const CategoryHeader = ({sortOrder,setSortOrder,minPrice,setMinPrice,maxPrice,se
             {/* contains the popup modal  */}
             {showModal && <FilterPopup setShowModal={setShowModal} 
             minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} handleFilter={handleFilter}
+            selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}
             />}
         </div>
     )
