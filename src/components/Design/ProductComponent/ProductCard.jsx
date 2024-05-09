@@ -2,6 +2,8 @@ import Link from "next/link";
 import AddToCartBtn from "../../hero/AddToCartBtn"
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
+import RatingStars from "@/components/hero/RatingStars";
+
 
 const ProductCard = ({ product }) => {
   return (
@@ -10,7 +12,7 @@ const ProductCard = ({ product }) => {
         <ProductCardHeader />
         <ProductCardBody product={product} />
       </Link>
-      <ProductCardRating />
+      <ProductCardRating product={product} />
       <AddToCartBtn />
     </div>
   )
@@ -44,14 +46,10 @@ const ProductCardInfos = ({ product }) => {
 }
 
 
-const ProductCardRating = () => {
+const ProductCardRating = ({product}) => {
   return (
     <div className="flex gap-1 text-lg my-2">
-      <FaStar className=" text-yellow-300" />
-      <FaStar className=" text-yellow-300" />
-      <FaStar className=" text-yellow-300" />
-      <CiStar className="text-xl" />
-      <CiStar className="text-xl" />
+          <RatingStars product={product}/>
     </div>
   )
 }
