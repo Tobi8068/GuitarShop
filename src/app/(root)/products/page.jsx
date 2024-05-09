@@ -8,9 +8,10 @@ import { fetchProducts } from '@/lib/features/product';
 import Link from 'next/link';
 import FilterPopup from '@/components/Design/PopupComponent/FilterPopup';
 import ProductCardLoader from '@/components/Loader/ProductCardLoader/ProductCardLoader';
+import ProductNotFound from '@/components/Design/NotFoundComponent/ProductNotFound';
 
 const page = ({ searchParams }) => {
-    const [sortOrder, setSortOrder] = useState({term:'def',sort:'Default'})
+    const [sortOrder, setSortOrder] = useState({ term: 'def', sort: 'Default' })
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -29,25 +30,28 @@ const page = ({ searchParams }) => {
     }
 
     useEffect(() => {
-        dispatch(fetchProducts({ url: `product?page=${currPage}&sort=${sortOrder.term}`, minPrice, maxPrice, category:selectedCategories }))
-    }, [currPage,sortOrder])
+        dispatch(fetchProducts({ url: `product?page=${currPage}&sort=${sortOrder.term}`, minPrice, maxPrice, category: selectedCategories }))
+    }, [currPage, sortOrder])
 
-    const handleFilter = () =>{
-        dispatch(fetchProducts({ url: `product?sort=${sortOrder.term}`, minPrice, maxPrice, category:selectedCategories }))
+    const handleFilter = () => {
+        dispatch(fetchProducts({ url: `product?sort=${sortOrder.term}`, minPrice, maxPrice, category: selectedCategories }))
     }
 
     return (
         <>
             <BannerComponent />
-            <CategoryHeader sortOrder={sortOrder} setSortOrder={setSortOrder} 
-            minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice}
-            selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}
-            handleFilter={handleFilter}
+            <CategoryHeader sortOrder={sortOrder} setSortOrder={setSortOrder}
+                minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice}
+                selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}
+                handleFilter={handleFilter}
             />
             <div className="w-full  mt-1 mb-10 px-5 grid grid-cols-2 gap-2 md:px-0 md:w-3/4 md:mx-auto lg:grid-cols-4 md:gap-4 ">
                 {products.isLoading ? (
                     // Show loading indicator
-                    <ProductCardLoader count={4}/>
+                    <ProductCardLoader count={4} />
+                ) : products.data.length === 0 ? (
+                    // Show message when no products are found
+                    null // Do not render anything here, as ProductNotFound will be rendered separately
                 ) : (
                     // Render products
                     products.data.map((product, index) => (
@@ -55,6 +59,9 @@ const page = ({ searchParams }) => {
                     ))
                 )}
             </div>
+            {products.data.length === 0 && !products.isLoading && (
+                <ProductNotFound />
+            )}
             <div className='w-full font-semibold flex justify-center px-5 gap-2  md:px-0 md:w-3/4 md:mx-auto md:gap-3 '>
                 <PageNumber pgNos={pgNos} sortOrder={sortOrder} searchParams={searchParams} />
             </div>
@@ -63,8 +70,8 @@ const page = ({ searchParams }) => {
     )
 }
 
-const CategoryHeader = ({sortOrder,setSortOrder,minPrice,setMinPrice,maxPrice,setMaxPrice,selectedCategories, setSelectedCategories,handleFilter}) => {
- 
+const CategoryHeader = ({ sortOrder, setSortOrder, minPrice, setMinPrice, maxPrice, setMaxPrice, selectedCategories, setSelectedCategories, handleFilter }) => {
+
     const [showModal, setShowModal] = useState(false);
     const [dropdown, setDropdown] = useState(false)
 
@@ -92,9 +99,9 @@ const CategoryHeader = ({sortOrder,setSortOrder,minPrice,setMinPrice,maxPrice,se
                 <FaFilter />
             </div>
             {/* contains the popup modal  */}
-            {showModal && <FilterPopup setShowModal={setShowModal} 
-            minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} handleFilter={handleFilter}
-            selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}
+            {showModal && <FilterPopup setShowModal={setShowModal}
+                minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} handleFilter={handleFilter}
+                selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}
             />}
         </div>
     )
@@ -106,9 +113,9 @@ const DropDown = ({ sortProduct }) => {
     return (
         <div className="absolute left-0 z-10 mt-3 -ml-1 w-56 origin-top-right rounded-md bg-white dark:bg-gray-900 shadow-lg dark:border-gray-700 border-2" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
             <div className="py-1" role="none">
-                <span onClick={() => { sortProduct({term:'def',sort:'Default'}) }} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-0">Default</span>
-                <span onClick={() => { sortProduct({term:'asc',sort:'Ascending'}) }} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-1">Ascending</span>
-                <span onClick={() => { sortProduct({term:'desc',sort:'Descending'}) }} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-2">Descending</span>
+                <span onClick={() => { sortProduct({ term: 'def', sort: 'Default' }) }} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-0">Default</span>
+                <span onClick={() => { sortProduct({ term: 'asc', sort: 'Ascending' }) }} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-1">Ascending</span>
+                <span onClick={() => { sortProduct({ term: 'desc', sort: 'Descending' }) }} className="block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-item-2">Descending</span>
             </div>
         </div>
     )
