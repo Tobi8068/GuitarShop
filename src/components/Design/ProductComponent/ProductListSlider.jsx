@@ -22,7 +22,8 @@ function SamplePrevArrow(props) {
 }
 // custom next and previous buttons for slider 
 
-const ProductListSlider = ({ products }) => {
+const ProductListSlider = ({products}) => {
+
   const settings = {
     dots: false,
     infinite: true,
