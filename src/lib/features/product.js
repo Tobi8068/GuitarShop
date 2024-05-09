@@ -18,7 +18,6 @@ export const fetchProducts = createAsyncThunk('fetchProducts',async ({ url, minP
 
         // Check if category is provided and add it to the queryParams array
         if (category && category.length!==0) {
-            console.log('cat is here');
             queryParams.push(`category=${category}`);
         }
  
@@ -41,8 +40,18 @@ export const fetchSingleProduct = createAsyncThunk('fetchSingleProduct',async (i
     }
 })
 
+export const fetchTopRatedProduct = createAsyncThunk('fetchTopRatedProduct',async ()=>{
+    try {
+        const response = await API.get(`product/top-rated`)
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 const initialState={
     data: [],
+    topRated: [],
     singleProductData :{},
     isLoading:true,
     error: null,
@@ -76,6 +85,17 @@ const productSlice = createSlice({
             state.singleProductData = action.payload
         });
         builder.addCase(fetchSingleProduct.rejected,(state,action)=>{
+            state.isLoading= false,
+            state.error= true
+        });
+        builder.addCase(fetchTopRatedProduct.pending,(state,action)=>{
+            state.isLoading= true
+        });
+        builder.addCase(fetchTopRatedProduct.fulfilled,(state,action)=>{
+            state.isLoading= false,
+            state.topRated = action.payload
+        });
+        builder.addCase(fetchTopRatedProduct.rejected,(state,action)=>{
             state.isLoading= false,
             state.error= true
         });
