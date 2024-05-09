@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProductCard2 from './ProductCard2';
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
+import ProductCard2Loader from '@/components/Loader/ProductCardLoader/ProductCard2Loader';
 
 // custom next and previous buttons for slider 
 function SampleNextArrow(props) {
@@ -21,7 +22,7 @@ function SamplePrevArrow(props) {
 }
 // custom next and previous buttons for slider 
 
-const ProductListSlider = () => {
+const ProductListSlider = ({ products }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -64,12 +65,20 @@ const ProductListSlider = () => {
   return (
     <>
       {/* Deal of the day  */}
-      <Slider {...settings}>
-        <ProductCard2 />
-        <ProductCard2 />
-        <ProductCard2 />
-        <ProductCard2 />
-      </Slider>
+      {products.isLoading ? (
+        <Slider {...settings}>
+          {[...Array(4)].map((_, index) => (
+            <ProductCard2Loader key={index} />
+          ))}
+        </Slider>
+      ) : (
+        <Slider {...settings}>
+          {products.data.map((product, index) => (
+            <ProductCard2 key={index} product={product} />
+          ))}
+        </Slider>
+      )}
+      {/* Deal of the day  */}
       {/* Deal of the day  */}
     </>
   )
