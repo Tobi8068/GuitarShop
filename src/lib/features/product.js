@@ -24,7 +24,7 @@ export const fetchProducts = createAsyncThunk('fetchProducts',async ({ url, minP
  
         // Construct the URL with query parameters if any
         const fullUrl = queryParams.length > 0 ? `${url}&${queryParams.join('&')}` : url;
-        console.log(fullUrl);
+        // console.log(fullUrl);
         const response = await API.get(fullUrl)
         return response.data;
     } catch (error) {
