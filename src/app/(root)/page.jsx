@@ -27,7 +27,7 @@ const page = () => {
         ) : (
           // Render products
           products.data.map((product, index) => (
-            <ProductCard key={index} product={product} />
+            <ProductCard key={product._id} product={product} />
           ))
         )}
       </div>
