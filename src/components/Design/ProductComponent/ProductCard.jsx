@@ -9,7 +9,7 @@ const ProductCard = ({ product }) => {
   return (
     <div className="cursor-pointer bg-white dark:bg-inherit dark:border-gray-700 dark:border-2 rounded p-3 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
       <Link href={`products/${product._id}`}>
-        <ProductCardHeader />
+        <ProductCardHeader product={product}/>
         <ProductCardBody product={product} />
       </Link>
       <ProductCardRating product={product} />
@@ -18,10 +18,10 @@ const ProductCard = ({ product }) => {
   )
 }
 
-const ProductCardHeader = () => {
+const ProductCardHeader = ({product}) => {
   return (
     <div className="w-full aspect-square bg-gray-200 rounded">
-      <img src='/guitar.jpg' className="w-full h-full object-cover rounded" ></img>
+      <img src={`http://localhost:3001/products/${product.product_image}`} className="w-full h-full object-cover rounded" ></img>
     </div>
   )
 }
@@ -48,7 +48,7 @@ const ProductCardInfos = ({ product }) => {
 
 const ProductCardRating = ({product}) => {
   return (
-    <div className="flex gap-1 text-lg my-2">
+    <div className="flex gap-1 text-lg my-3">
           <RatingStars product={product}/>
     </div>
   )
