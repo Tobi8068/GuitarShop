@@ -79,7 +79,6 @@ const ProductListSlider = ({ products }) => {
         </Slider>
       )}
       {/* Deal of the day  */}
-      {/* Deal of the day  */}
     </>
   )
 }
