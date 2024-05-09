@@ -3,7 +3,7 @@ import ProductCard from '@/components/Design/ProductComponent/ProductCard'
 import ProductListSlider from '@/components/Design/ProductComponent/ProductListSlider'
 import BannerComponent from '@/components/RootComponent/BannerComponent'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { fetchProducts } from '@/lib/features/product';
+import { fetchProducts, fetchTopRatedProduct } from '@/lib/features/product';
 import { useEffect } from 'react';
 import ProductCardLoader from '@/components/Loader/ProductCardLoader/ProductCardLoader';
 
@@ -12,7 +12,9 @@ const page = () => {
   const products = useAppSelector((state) => state.product)
   useEffect(() => {
     dispatch(fetchProducts({ url: `product` }))
+    dispatch(fetchTopRatedProduct())
   }, [])
+
   return (
     <>
       <BannerComponent />
@@ -26,7 +28,7 @@ const page = () => {
           <ProductCardLoader count={4} />
         ) : (
           // Render products
-          products.data.map((product, index) => (
+          products.topRated.map((product, index) => (
             <ProductCard key={product._id} product={product} />
           ))
         )}
@@ -37,8 +39,7 @@ const page = () => {
         <h1 className='font-bold text-xl text-gray-600 dark:text-gray-300 md:text-2xl'>Deal of the Day</h1>
       </div>
       <div className="w-full mt-3 px-5 md:px-3  md:w-3/4 md:mx-auto">
-        <ProductListSlider products={products} />
-        
+        <ProductListSlider products={products} />    
       </div>
       {/* Deal of the day  */}
     </>
