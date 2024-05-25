@@ -1,3 +1,5 @@
+'use client'
+import withAuth from "@/app/authProvider"
 import OrderCardComponent from "@/components/Design/OrderCardComponent/OrderCardComponent";
 import ProfileCard from "@/components/Design/ProfileComponent/ProfileCard";
 import ProfileCollection from "@/components/Design/ProfileComponent/ProfileCollection";
@@ -11,7 +13,7 @@ const Profile = () => {
         <ProfileCollection/>
       </div>
       <div className="w-full flex justify-between mt-5">
-        <h1 className='text-xl font-bold  '>My Orders</h1>
+        <h1 className='text-xl font-bold '>My Orders</h1>
         <h1 className='text-gray-500 font-semibold '>See All</h1>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-3 my-5 md:px-0 ">
@@ -23,4 +25,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default withAuth(Profile)
