@@ -1,3 +1,5 @@
+// userSlice.js
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import API from "@/config/config";
 
@@ -7,7 +9,6 @@ const initialState = {
     token: null,
     isLoading: false,
     error: null,
-    // success:false
 };
 
 // Async thunk for login
@@ -24,9 +25,22 @@ export const loginUser = createAsyncThunk('/login', async ({ email, password }, 
 export const logoutUser = createAsyncThunk('user/logout', async (_, { rejectWithValue }) => {
     try {
         const response = await API.post('/auth/logout');
-        return response.data
+        return response.data;
     } catch (error) {
         return rejectWithValue(error.response.data);
+    }
+});
+
+// Async thunk for auth
+export const checkAuth = createAsyncThunk('user/checkAuth', async (_, { rejectWithValue }) => {
+    try {
+        const response = await API.get('/auth/user');
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.status === 401) {
+            return rejectWithValue('unauthorized');
+        }
+        return rejectWithValue('An error occurred');
     }
 });
 
@@ -57,7 +71,7 @@ const userSlice = createSlice({
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.payload.message;
+                state.error = action.payload;
             })
             .addCase(logoutUser.pending, (state) => {
                 state.isLoading = true;
@@ -70,7 +84,20 @@ const userSlice = createSlice({
             })
             .addCase(logoutUser.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.payload.message;
+                state.error = action.payload;
+            })
+            .addCase(checkAuth.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(checkAuth.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.data = action.payload.user;
+            })
+            .addCase(checkAuth.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+                state.data = null; // Clear the user data on unauthorized
             });
     },
 });
