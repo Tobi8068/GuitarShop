@@ -7,12 +7,14 @@ import { fetchProducts, fetchTopRatedProduct } from '@/lib/features/product';
 import { useEffect } from 'react';
 import ProductCardLoader from '@/components/Loader/ProductCardLoader/ProductCardLoader';
 
+
 const page = () => {
   const dispatch = useAppDispatch()
   const products = useAppSelector((state) => state.product)
   useEffect(() => {
     dispatch(fetchProducts({ url: `product` }))
     dispatch(fetchTopRatedProduct())
+
   }, [])
 
   return (
