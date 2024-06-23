@@ -16,6 +16,8 @@ const LoginForm = () => {
         const res = await dispatch(loginUser({ email, password }))
         if (res.payload.success) {
             router.push('/')
+        }else{
+            alert('Invalid Email Or Password');
         }
     };
 
