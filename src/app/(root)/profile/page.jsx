@@ -3,13 +3,17 @@ import withAuth from "@/app/authProvider"
 import OrderCardComponent from "@/components/Design/OrderCardComponent/OrderCardComponent";
 import ProfileCard from "@/components/Design/ProfileComponent/ProfileCard";
 import ProfileCollection from "@/components/Design/ProfileComponent/ProfileCollection";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useEffect } from "react";
 
 const Profile = () => {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user);
   return (
     <>
       <h1 className='text-xl font-bold md:text-2xl'>My Profile</h1>
       <div className="w-full md:flex md:gap-2 mt-3">
-        <ProfileCard/>
+        <ProfileCard user={user.data}/>
         <ProfileCollection/>
       </div>
       <div className="w-full flex justify-between mt-5">
