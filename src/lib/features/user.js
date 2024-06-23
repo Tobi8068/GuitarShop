@@ -76,15 +76,19 @@ const userSlice = createSlice({
             .addCase(logoutUser.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
+                // console.log('pend');
             })
-            .addCase(logoutUser.fulfilled, (state) => {
+            .addCase(logoutUser.fulfilled, (state,action) => {
                 state.isLoading = false;
                 state.data = null;
                 state.token = null;
+                // console.log('done');
+               
             })
             .addCase(logoutUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
+                // console.log('no');
             })
             .addCase(checkAuth.pending, (state) => {
                 state.isLoading = true;
