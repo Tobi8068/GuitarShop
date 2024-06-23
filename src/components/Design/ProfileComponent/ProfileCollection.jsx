@@ -1,18 +1,19 @@
 'use client'
-import { logoutUser } from '@/lib/features/user';
+import {  logoutUser } from '@/lib/features/user';
+import { useAppDispatch } from '@/lib/hooks';
 import { useRouter } from 'next/navigation';
-import { useDispatch, useSelector } from 'react-redux';
 
 const ProfileCollection = () => {
     const router = useRouter();
-    const dispatch = useDispatch();
-    const user = useSelector((state) => state.user);
+    const dispatch = useAppDispatch();
+    // const user = useSelector((state) => state.user);
     const logout = async  () =>{
         const res = await dispatch(logoutUser())
         if (res.payload.success) {
-            router.push('/login');
+            router.push('/login')
         }
     }
+    
     return (
         <div className="w-full md:w-1/4 bg-inherit border mt-3 md:mt-0 p-3  grid place-items-center lg:block border-gray-200 rounded-lg shadow dark:border-gray-700">
             <div className="flex gap-2 md:flex-col  ">
