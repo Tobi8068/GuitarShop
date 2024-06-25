@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
         <ProductCardBody product={product} />
       </Link>
       <ProductCardRating product={product} />
-      <AddToCartBtn />
+      <AddToCartBtn product={product}/>
     </div>
   )
 }
