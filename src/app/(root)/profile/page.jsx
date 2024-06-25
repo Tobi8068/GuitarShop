@@ -3,11 +3,9 @@ import withAuth from "@/app/authProvider"
 import OrderCardComponent from "@/components/Design/OrderCardComponent/OrderCardComponent";
 import ProfileCard from "@/components/Design/ProfileComponent/ProfileCard";
 import ProfileCollection from "@/components/Design/ProfileComponent/ProfileCollection";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { useEffect } from "react";
+import {  useAppSelector } from "@/lib/hooks";
 
 const Profile = () => {
-  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   return (
     <>
