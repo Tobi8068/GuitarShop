@@ -35,7 +35,9 @@ export const logoutUser = createAsyncThunk('user/logout', async (_, { rejectWith
 export const checkAuth = createAsyncThunk('user/checkAuth', async (_, { rejectWithValue }) => {
     try {
         const response = await API.get('/auth/user');
+        // console.log(response.data);
         return response.data;
+        
     } catch (error) {
         if (error.response && error.response.status === 401) {
             return rejectWithValue('unauthorized');
@@ -66,7 +68,7 @@ const userSlice = createSlice({
             })
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.data = action.payload.user;
+                // state.data = action.payload.user;
                 state.token = action.payload.token;
             })
             .addCase(loginUser.rejected, (state, action) => {
