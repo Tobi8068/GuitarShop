@@ -50,7 +50,7 @@ const ProductCard2Info = ({ product }) => {
                 {product.description}
             </p>
             <h2 className="text-lg font-bold my-3 text-red-600 ">$ {product.price}</h2>
-            <AddToCartBtn2 />
+            <AddToCartBtn2 product={product}/>
         </div>
     )
 }
