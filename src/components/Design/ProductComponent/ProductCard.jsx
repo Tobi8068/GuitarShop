@@ -1,8 +1,7 @@
 import Link from "next/link";
 import AddToCartBtn from "../../hero/AddToCartBtn"
-import { CiStar } from "react-icons/ci";
-import { FaStar } from "react-icons/fa";
 import RatingStars from "@/components/hero/RatingStars";
+import OutOfStockComponent from "@/components/hero/OutOfStockComponent";
 
 
 const ProductCard = ({ product }) => {
@@ -13,7 +12,11 @@ const ProductCard = ({ product }) => {
         <ProductCardBody product={product} />
       </Link>
       <ProductCardRating product={product} />
-      <AddToCartBtn product={product}/>
+      {/* {product.quantity==0 ? (
+        <OutOfStockComponent/>
+      ):(
+        <AddToCartBtn product={product}/>
+      )} */}
     </div>
   )
 }
