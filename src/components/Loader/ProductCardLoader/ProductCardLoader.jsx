@@ -16,11 +16,6 @@ const ProductCardLoader = ({ count }) => {
                             </div>
                             <div className="w-24 h-4 rounded mt-3 bg-gray-200 dark:bg-gray-700 "></div>
                         </div>
-                        {/* Loader footer */}
-                        <div className='w-full h-8 rounded bg-gray-200 dark:bg-gray-700 my-2 py-2 text-inherit '>
-
-                        </div>
-                        {/* Loader footer */}
                     </div>
                 </div>
             ))}
