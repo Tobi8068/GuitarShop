@@ -63,6 +63,22 @@ const initialState={
 const productSlice = createSlice({
     name:'product',
     initialState: initialState,
+    reducers: {
+        incrementQuantity: (state, action) => {
+            const quantity = action.payload.quantity || 1; // Default to 1 if no quantity provided
+            if (state.singleProductData.quantity) {
+                state.singleProductData.quantity += quantity;
+            }
+        },
+        decrementQuantity: (state, action) => {
+            const quantity = action.payload.quantity || 1; // Default to 1 if no quantity provided
+            if (state.singleProductData.quantity >= quantity) {
+                state.singleProductData.quantity -= quantity;
+            } else {
+                state.singleProductData.quantity = 0; // Ensure quantity doesn't go below 0
+            }
+        }
+    },
     extraReducers: (builder)=>{
         builder.addCase(fetchProducts.pending,(state,action)=>{
             state.isLoading= true
@@ -102,4 +118,5 @@ const productSlice = createSlice({
     }
 })
 
+export const { incrementQuantity, decrementQuantity } = productSlice.actions;
 export default productSlice.reducer
