@@ -2,7 +2,7 @@
 import withAuth from "@/app/authProvider"
 import CartComponent from "@/components/Design/CartComponent/CartComponent";
 import CheckOutComponent from "@/components/Design/CartComponent/CheckOutComponent";
-import cart, { fetchCartItems, removeFromCart } from "@/lib/features/cart";
+import { fetchCartItems, removeFromCart } from "@/lib/features/cart";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useEffect } from "react";
 
@@ -32,7 +32,7 @@ function CartPage() {
   return (
     <>
       <div className="md:flex md:w-3/4 gap-2 md:mx-auto">
-        <h1 className='text-xl px-5 md:px-0 mt-2 font-bold md:text-2xl mb-2'>Your Cart</h1>
+        <h1 className='text-xl px-5 md:px-0 mt-4 font-bold md:text-2xl mb-2'>Your Cart</h1>
       </div>
       <div className="md:flex px-5 md:w-3/4 gap-2 md:px-0 md:mx-auto">
         {/* Cart Part  */}
@@ -42,7 +42,7 @@ function CartPage() {
               <CartComponent key={index} item={item} handleRemoveFromCart={handleRemoveFromCart}/>
             ))
           ) : (
-            <div>Your cart is empty</div>
+            <div className="h-20 md:h-96">Your cart is empty</div>
           )}
         </div>
         {/* Cart Part  */}
