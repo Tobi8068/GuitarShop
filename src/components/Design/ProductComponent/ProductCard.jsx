@@ -1,8 +1,5 @@
 import Link from "next/link";
-import AddToCartBtn from "../../hero/AddToCartBtn"
 import RatingStars from "@/components/hero/RatingStars";
-import OutOfStockComponent from "@/components/hero/OutOfStockComponent";
-
 
 const ProductCard = ({ product }) => {
   return (
