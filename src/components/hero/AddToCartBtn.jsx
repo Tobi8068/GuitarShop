@@ -15,7 +15,7 @@ const AddToCartBtn = ({product,quantity}) => {
             alert('Product added to cart successfully');
         }
         else {
-            alert('You Must Login First');
+            alert('Please Log In First');
         }
     };
     return (
