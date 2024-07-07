@@ -76,12 +76,15 @@ const ProductDetails = ({ params }) => {
                             ) : (
                                 <AddToCartBtn product={data} quantity={quantity}/>
                             )}
-                            <WishListBtn />
+                            <WishListBtn product={data} />
                         </div>
                     </div>
                 </div>
             ) : (
-                <div>Product details not available.</div>
+                <div className="w-full mt-4 px-5 lg:flex lg:gap-6 md:mb-10 md:px-0 md:w-3/5 lg:w-3/4 md:mx-auto ">
+                     <div>Product details not available.</div>
+                </div>
+               
             )}
         </>
     );
