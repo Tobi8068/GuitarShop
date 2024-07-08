@@ -11,6 +11,19 @@ const initialState = {
     error: null,
 };
 
+// Async thunk for register
+export const registerUser = createAsyncThunk('auth/register', async (userData, { rejectWithValue }) => {
+    try {
+        const response = await API.post('/auth/register', userData);
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data) {
+            return rejectWithValue(error.response.data.message);
+        }
+        return rejectWithValue(error.message);
+    }
+});
+
 // Async thunk for login
 export const loginUser = createAsyncThunk('/login', async ({ email, password }, { rejectWithValue }) => {
     try {
@@ -46,6 +59,8 @@ export const checkAuth = createAsyncThunk('user/checkAuth', async (_, { rejectWi
     }
 });
 
+
+
 // Create the user slice
 const userSlice = createSlice({
     name: 'user',
@@ -62,6 +77,17 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(registerUser.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(registerUser.fulfilled, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(registerUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload.message;
+            })
             .addCase(loginUser.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
