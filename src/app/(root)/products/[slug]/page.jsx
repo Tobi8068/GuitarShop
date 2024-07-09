@@ -1,4 +1,5 @@
 'use client'
+import ProductNotFound from "@/components/Design/NotFoundComponent/ProductNotFound";
 import AddToCartBtn from "@/components/hero/AddToCartBtn";
 import WishListBtn from "@/components/hero/AddToWishlistBtn";
 import OutOfStockComponent from "@/components/hero/OutOfStockComponent";
@@ -81,9 +82,7 @@ const ProductDetails = ({ params }) => {
                     </div>
                 </div>
             ) : (
-                <div className="w-full mt-4 px-5 lg:flex lg:gap-6 md:mb-10 md:px-0 md:w-3/5 lg:w-3/4 md:mx-auto ">
-                     <div>Product details not available.</div>
-                </div>
+                <ProductNotFound/>
                
             )}
         </>
