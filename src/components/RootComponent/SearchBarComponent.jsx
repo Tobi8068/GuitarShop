@@ -3,6 +3,7 @@ import { searchProducts, setSearchLoading } from '@/lib/features/product';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { useState, useEffect } from 'react';
 import SearchLoader from '../Loader/SearchLoader';
+import Link from 'next/link';
 
 const SearchComponent = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -13,7 +14,6 @@ const SearchComponent = () => {
     const handleInputChange = (e) => {
         const value = e.target.value;
         setSearchTerm(value);
-
         if (typingTimeout) {
             clearTimeout(typingTimeout);
         }
@@ -54,7 +54,7 @@ const SearchComponent = () => {
                         <p>{error}</p>
                     ) : searchData.length > 0 ? (
                         searchData.map((product) => (
-                            <SearchResults product={product}/>
+                            <SearchResults product={product}  setSearchTerm={setSearchTerm}/>
                         ))
                     ) : (
                         <p>No results found</p>
@@ -66,8 +66,9 @@ const SearchComponent = () => {
     );
 };
 
-const SearchResults = ({ product }) => {
+const SearchResults = ({ product,setSearchTerm }) => {
     return (
+        <Link href={`/products/${product._id}`} onClick={()=>{setSearchTerm('') }}>
             <div key={product._id} className="p-2 border-b border-gray-200 dark:border-gray-600 flex gap-2">
                 <div className='aspect-square p-8 md:p-10 bg-gray-300' style={{
                     backgroundImage: `url(http://localhost:3001/products/${product.product_image})`,
@@ -80,6 +81,7 @@ const SearchResults = ({ product }) => {
                     <p className='text-sm text-gray-600 dark:text-gray-400'>{product.price}</p>
                 </div>
             </div>
+        </Link>
     );
 };
 
