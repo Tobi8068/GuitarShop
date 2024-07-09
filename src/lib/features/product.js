@@ -49,10 +49,22 @@ export const fetchTopRatedProduct = createAsyncThunk('fetchTopRatedProduct',asyn
     }
 })
 
+// Async thunk for searching products by name
+export const searchProducts = createAsyncThunk('searchProductsByName', async (name, thunkAPI) => {
+    try {
+        const response = await API.get(`/product/search?name=${name}`);
+        return response.data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue({ message: error.response?.data?.message || error.message });
+    }
+});
+
 const initialState={
     data: [],
     topRated: [],
+    searchData: [],
     singleProductData :{},
+    searchLoading:true,
     isLoading:true,
     error: null,
     status: "idle",
@@ -64,6 +76,9 @@ const productSlice = createSlice({
     name:'product',
     initialState: initialState,
     reducers: {
+        setSearchLoading: (state, action) => {
+            state.searchLoading = action.payload;
+          },
         incrementQuantity: (state, action) => {
             const quantity = action.payload.quantity || 1; // Default to 1 if no quantity provided
             if (state.singleProductData.quantity) {
@@ -115,8 +130,20 @@ const productSlice = createSlice({
             state.isLoading= false,
             state.error= true
         });
+        builder.addCase(searchProducts.pending, (state) => {
+            state.searchLoading = true;
+            state.error = null;
+        })
+        .addCase(searchProducts.fulfilled, (state, action) => {
+            state.searchLoading = false;
+            state.searchData = action.payload.data;
+        })
+        .addCase(searchProducts.rejected, (state, action) => {
+            state.searchLoading = false;
+            state.error = action.payload?.message || 'An error occurred';
+        });
     }
 })
 
-export const { incrementQuantity, decrementQuantity } = productSlice.actions;
+export const { incrementQuantity, decrementQuantity,setSearchLoading  } = productSlice.actions;
 export default productSlice.reducer
