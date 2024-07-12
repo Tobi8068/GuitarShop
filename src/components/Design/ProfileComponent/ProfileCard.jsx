@@ -9,7 +9,7 @@ const ProfileCard = ({user}) => {
         <span className="text-sm text-gray-500 dark:text-gray-400 lg:text-lg">{user.address}</span>
         <span className="text-sm text-gray-500 dark:text-gray-400 lg:text-lg">{user.phone}</span>
         <span className="text-sm text-gray-500 dark:text-gray-400 lg:text-lg">{user.email}</span>
-        <span className="text-sm font-semibold mt-2 text-gray-500 dark:text-gray-400 lg:text-lg">Edit Profile</span>
+        {/* <span className="text-sm font-semibold mt-2 text-gray-500 dark:text-gray-400 lg:text-lg">Edit Profile</span> */}
       </div>
     </div>
   </div>
