@@ -6,7 +6,7 @@ import { useState } from 'react';
 import EditProfilePopup from '../PopupComponent/EditProfilePopup';
 import ChangePasswordPopup from '../PopupComponent/ChangePasswordPopup';
 
-const ProfileCollection = () => {
+const ProfileCollection = ({user}) => {
     const [editProfilePopup, setEditProfilePopup] = useState(false);
     const [passwordPopup, setPasswordPopup] = useState(false);
     const router = useRouter();
@@ -34,8 +34,8 @@ const ProfileCollection = () => {
                     </div>
                 </div>
             </div>
-            {editProfilePopup && <EditProfilePopup setEditProfilePopup={setEditProfilePopup} />}
-            {passwordPopup && <ChangePasswordPopup setPasswordPopup={setPasswordPopup}/>}
+            {editProfilePopup && <EditProfilePopup user={user} setEditProfilePopup={setEditProfilePopup} dispatch={dispatch} />}
+            {passwordPopup && <ChangePasswordPopup setPasswordPopup={setPasswordPopup} dispatch={dispatch}/>}
             {/* <EditProfilePopup/> */}
         </>
 
