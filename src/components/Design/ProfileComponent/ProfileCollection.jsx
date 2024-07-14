@@ -11,7 +11,7 @@ const ProfileCollection = ({user}) => {
     const [passwordPopup, setPasswordPopup] = useState(false);
     const router = useRouter();
     const dispatch = useAppDispatch();
-    // const user = useSelector((state) => state.user);
+    
     const logout = async () => {
         const res = await dispatch(logoutUser())
         if (res.payload.success) {
@@ -35,7 +35,7 @@ const ProfileCollection = ({user}) => {
                 </div>
             </div>
             {editProfilePopup && <EditProfilePopup user={user} setEditProfilePopup={setEditProfilePopup} dispatch={dispatch} />}
-            {passwordPopup && <ChangePasswordPopup setPasswordPopup={setPasswordPopup} dispatch={dispatch}/>}
+            {passwordPopup && <ChangePasswordPopup user={user} setPasswordPopup={setPasswordPopup} dispatch={dispatch}/>}
             {/* <EditProfilePopup/> */}
         </>
 
