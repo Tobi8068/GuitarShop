@@ -1,11 +1,38 @@
+'use client'
+import { updateData, updateUser } from '@/lib/features/user';
+import { useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
-const EditProfilePopup = ({ setEditProfilePopup }) => {
+const EditProfilePopup = ({ user, setEditProfilePopup, dispatch }) => {
+    
+    const [formData, setFormData] = useState({
+        first_name: user.first_name,
+        last_name: user.last_name,
+        address: user.address,
+        phone: user.phone,
+        email: user.email,
+      });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const result = await dispatch(updateUser({id:user._id,formData}));
+        if (updateUser.fulfilled.match(result)) {
+          dispatch(updateData(formData)) 
+          alert('User updated successfully');
+        } else {
+          alert('Unexpected Error Occured');
+        }
+      };
     return (
         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-11/12 my-6 mx-auto md:w-96">
                 <div className="border-0 rounded-t-lg shadow-lg relative flex flex-col w-full bg-white dark:bg-gray-900  dark:border-gray-700  outline-none focus:outline-none">
                     <EditProfileHeader setEditProfilePopup={setEditProfilePopup}/>
-                    <EditProfileForm/>
+                    <EditProfileForm user={formData} handleChange={handleChange} handleSubmit={handleSubmit}/>
                 </div>
             </div>
         </div>
@@ -23,9 +50,9 @@ const EditProfileHeader = ({setEditProfilePopup}) => {
     )
 }
 
-const EditProfileForm = () =>{
+const EditProfileForm = ({user,handleChange,handleSubmit}) =>{
     return (
-        <form className="relative flex-auto mt-4">
+        <form className="relative flex-auto mt-4" onSubmit={handleSubmit}>
         <div className="flex flex-wrap mb-6">
             <div className="w-full md:w-1/2 px-4 mb-6 md:mb-0">
                 <label
@@ -39,7 +66,7 @@ const EditProfileForm = () =>{
                     id="grid-first-name"
                     type="text"
                     name="first_name"
-
+                    value={user.first_name} onChange={handleChange}
                     placeholder="Jane"
                 />
             </div>
@@ -55,7 +82,7 @@ const EditProfileForm = () =>{
                     id="grid-last-name"
                     type="text"
                     name="last_name"
-
+                    value={user.last_name} onChange={handleChange}
                     placeholder="Doe"
                 />
             </div>
@@ -73,7 +100,7 @@ const EditProfileForm = () =>{
                     id="grid-address"
                     type="text"
                     name="address"
-
+                    value={user.address} onChange={handleChange}
                     placeholder="Kathmandu"
                 />
             </div>
@@ -89,7 +116,7 @@ const EditProfileForm = () =>{
                     id="grid-phone"
                     type="text"
                     name="phone"
-
+                    value={user.phone} onChange={handleChange}
                     placeholder="24955225"
                 />
             </div>
@@ -107,7 +134,7 @@ const EditProfileForm = () =>{
                     id="grid-email"
                     type="email"
                     name="email"
-
+                    value={user.email} onChange={handleChange}
                     placeholder="name@email.com"
                     required
                 />
