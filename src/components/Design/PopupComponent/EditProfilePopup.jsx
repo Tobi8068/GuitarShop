@@ -23,6 +23,7 @@ const EditProfilePopup = ({ user, setEditProfilePopup, dispatch }) => {
         if (updateUser.fulfilled.match(result)) {
           dispatch(updateData(formData)) 
           alert('User updated successfully');
+          setEditProfilePopup(false);
         } else {
           alert('Unexpected Error Occured');
         }
