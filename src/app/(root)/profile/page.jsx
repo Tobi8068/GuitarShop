@@ -7,12 +7,13 @@ import {  useAppSelector } from "@/lib/hooks";
 
 const Profile = () => {
   const user = useAppSelector((state) => state.user);
+
   return (
     <>
       <h1 className='text-xl font-bold md:text-2xl'>My Profile</h1>
       <div className="w-full md:flex md:gap-2 mt-3">
         <ProfileCard user={user.data}/>
-        <ProfileCollection/>
+        <ProfileCollection user={user.data} />
       </div>
       <div className="w-full flex justify-between mt-5">
         <h1 className='text-xl font-bold '>My Orders</h1>

@@ -24,6 +24,32 @@ export const registerUser = createAsyncThunk('auth/register', async (userData, {
     }
 });
 
+// Async thunk for edit user
+export const updateUser = createAsyncThunk(
+    'user/update',
+    async ({ id, formData }, { rejectWithValue }) => {
+        try {
+            const response = await API.put(`/user/${id}`, formData);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
+// Async thunk to change password 
+export const changePassword = createAsyncThunk(
+    'user/changePassword',
+    async ({ id, formData }, { rejectWithValue }) => {
+        try {
+            const response = await API.put(`/user/password/${id}`, formData);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
 // Async thunk for login
 export const loginUser = createAsyncThunk('/login', async ({ email, password }, { rejectWithValue }) => {
     try {
@@ -48,7 +74,6 @@ export const logoutUser = createAsyncThunk('user/logout', async (_, { rejectWith
 export const checkAuth = createAsyncThunk('user/checkAuth', async (_, { rejectWithValue }) => {
     try {
         const response = await API.get('/auth/user');
-        // console.log(response.data);
         return response.data;
         
     } catch (error) {
@@ -74,6 +99,9 @@ const userSlice = createSlice({
             state.data = null;
             state.token = null;
         },
+        updateData: (state,action)=>{
+            state.data = {...state.data,...action.payload};
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -85,6 +113,32 @@ const userSlice = createSlice({
                 state.isLoading = false;
             })
             .addCase(registerUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload.message;
+            })
+            .addCase(updateUser.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(updateUser.fulfilled, (state, action) => {
+                state.isLoading = false;
+                // state.user = action.payload;
+                state.error = null;
+            })
+            .addCase(updateUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+            .addCase(changePassword.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(changePassword.fulfilled, (state, action) => {
+                state.isLoading = false;
+                // state.user = action.payload;
+                state.error = null;
+            })
+            .addCase(changePassword.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload.message;
             })
@@ -135,5 +189,5 @@ const userSlice = createSlice({
 });
 
 // Export actions and reducer
-export const { setUser, clearUser } = userSlice.actions;
+export const { setUser, clearUser,updateData } = userSlice.actions;
 export default userSlice.reducer;
