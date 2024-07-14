@@ -37,6 +37,19 @@ export const updateUser = createAsyncThunk(
     }
 );
 
+// Async thunk to change password 
+export const changePassword = createAsyncThunk(
+    'user/changePassword',
+    async ({ id, formData }, { rejectWithValue }) => {
+        try {
+            const response = await API.put(`/user/password/${id}`, formData);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
 // Async thunk for login
 export const loginUser = createAsyncThunk('/login', async ({ email, password }, { rejectWithValue }) => {
     try {
@@ -115,6 +128,19 @@ const userSlice = createSlice({
             .addCase(updateUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
+            })
+            .addCase(changePassword.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(changePassword.fulfilled, (state, action) => {
+                state.isLoading = false;
+                // state.user = action.payload;
+                state.error = null;
+            })
+            .addCase(changePassword.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload.message;
             })
             .addCase(loginUser.pending, (state) => {
                 state.isLoading = true;
