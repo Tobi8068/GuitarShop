@@ -1,4 +1,3 @@
-'use client'
 import withAuth from "@/app/authProvider"
 import OrderCardComponent from "@/components/Design/OrderCardComponent/OrderCardComponent";
 import ProfileCard from "@/components/Design/ProfileComponent/ProfileCard";
