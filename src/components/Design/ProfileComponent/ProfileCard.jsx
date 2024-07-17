@@ -7,10 +7,6 @@ const ProfileCard = ({ user }) => {
   const dispatch = useAppDispatch()
   const [imageUrl, setImageUrl] = useState(initialImageUrl);
 
-  useEffect(()=>{
-    setImageUrl(initialImageUrl)
-  },[user])
-
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -19,7 +15,8 @@ const ProfileCard = ({ user }) => {
         const result = await dispatch(updateUser({id:user._id,formData}));
         if (updateUser.fulfilled.match(result)) {
           alert('Image updated successfully');
-          dispatch(fetchSingleUserData(user._id));
+          await dispatch(fetchSingleUserData(user._id));
+          setImageUrl(initialImageUrl)
         } else {
           alert('Unexpected Error Occured');
         }
