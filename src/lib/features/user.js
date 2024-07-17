@@ -12,6 +12,19 @@ const initialState = {
 };
 
 // Async thunk for register
+export const fetchSingleUserData = createAsyncThunk('user/:id', async (id, { rejectWithValue }) => {
+    try {
+        const response = await API.get(`/user/${id}`);
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data) {
+            return rejectWithValue(error.response.data.message);
+        }
+        return rejectWithValue(error.message);
+    }
+});
+
+// Async thunk for register
 export const registerUser = createAsyncThunk('auth/register', async (userData, { rejectWithValue }) => {
     try {
         const response = await API.post('/auth/register', userData);
@@ -105,6 +118,18 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(fetchSingleUserData.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(fetchSingleUserData.fulfilled, (state,action) => {
+                state.isLoading = false;
+                state.data = action.payload.user;
+            })
+            .addCase(fetchSingleUserData.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload.message;
+            })
             .addCase(registerUser.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
