@@ -1,12 +1,8 @@
-import { checkAuth, fetchSingleUserData, updateUser } from "@/lib/features/user";
+import { fetchSingleUserData, updateUser } from "@/lib/features/user";
 import { useAppDispatch } from "@/lib/hooks";
-import { useEffect, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 const ProfileCard = ({ user }) => {
-  const initialImageUrl = user.image ? `http://localhost:3001/users/${user.image}` : 'guitar.jpg';
-  const dispatch = useAppDispatch()
-  const [imageUrl, setImageUrl] = useState(initialImageUrl);
-
+  const dispatch = useAppDispatch();
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -15,8 +11,7 @@ const ProfileCard = ({ user }) => {
         const result = await dispatch(updateUser({id:user._id,formData}));
         if (updateUser.fulfilled.match(result)) {
           alert('Image updated successfully');
-          await dispatch(fetchSingleUserData(user._id));
-          setImageUrl(initialImageUrl)
+          dispatch(fetchSingleUserData(user._id));
         } else {
           alert('Unexpected Error Occured');
         }
@@ -27,7 +22,7 @@ const ProfileCard = ({ user }) => {
       <div className="flex items-center gap-2 p-3 md:p-5 md:gap-5">
         <div className="relative group w-28 h-28 md:w-40 md:h-40 mb-3 rounded-full shadow-lg cursor-pointer">
           <input type="file" id="user_image" className="hidden"  accept="image/*"  onChange={handleImageChange}/>
-          <img className="w-full h-full object-cover rounded-full" src={imageUrl} alt="profile image" />
+          <img className="w-full h-full object-cover rounded-full" src={user.image ? `http://localhost:3001/users/${user.image}`: 'guitar.jpg'} alt="profile image" />
           <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
           <label htmlFor="user_image">
             <FaCamera className="absolute inset-0 m-auto w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" />
