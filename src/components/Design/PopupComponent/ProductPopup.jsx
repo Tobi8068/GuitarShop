@@ -1,8 +1,8 @@
 'use client'
-import { addProduct } from '@/lib/features/product';
+
 import { useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
-const ProductPopup = ({ fetchProducts, dispatch, setProductPopup, categories, brands }) => {
+const ProductPopup = ({ setProductPopup, categories, brands ,handleSubmit}) => {
     const [formData, setFormData] = useState({
         product_name: '',
         price: '',
@@ -10,7 +10,7 @@ const ProductPopup = ({ fetchProducts, dispatch, setProductPopup, categories, br
         category_id: '',
         brand_id: '',
         description: '',
-        image: null,
+        product_image: null,
     });
 
     const handleChange = (e) => {
@@ -19,23 +19,6 @@ const ProductPopup = ({ fetchProducts, dispatch, setProductPopup, categories, br
             setFormData({ ...formData, image: files[0] });
         } else {
             setFormData({ ...formData, [name]: value });
-        }
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formDataToSend = new FormData();
-        for (let key in formData) {
-            formDataToSend.append(key, formData[key]);
-        }
-        const result = await dispatch(addProduct(formDataToSend));
-        if (addProduct.fulfilled.match(result)) {
-            setProductPopup(false)
-            dispatch(fetchProducts({ url: `product?limit=8` }));
-            alert('Product Added Successfully');
-
-        } else {
-            alert('Unexpected Error Occured');
         }
     };
 
@@ -66,7 +49,7 @@ const ProductPopupHeader = ({ setProductPopup }) => {
 
 const ProductForm = ({ formData, handleChange, handleSubmit, categories, brands }) => {
     return (
-        <form className="relative flex-auto mt-4" onSubmit={handleSubmit}>
+        <form className="relative flex-auto mt-4" onSubmit={()=>{handleSubmit(event,formData)}}>
             <div className="flex flex-wrap mb-4">
                 <div className="w-full px-4">
                     <label
