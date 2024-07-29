@@ -49,6 +49,24 @@ export const deleteProduct = createAsyncThunk('deleteProduct', async (id)=>{
     }
 })
 
+export const updateProduct = createAsyncThunk(
+    'product/update',
+    async ({ id, formData }, { rejectWithValue }) => {
+        try {
+            const response = await API.put(`/product/${id}`, formData);
+            return response.data;
+        } catch (error) {
+            if (error.response && error.response.data) {
+                // If the error has a response with data, return it as rejectWithValue
+                return rejectWithValue(error.response.data);
+            } else {
+                // Otherwise, return a general error message
+                return rejectWithValue({ message: 'An error occurred while updating the product' });
+            }
+        }
+    }
+);
+
 export const fetchSingleProduct = createAsyncThunk('fetchSingleProduct',async (id)=>{
     try {
         const response = await API.get(`product/${id}`)
@@ -130,6 +148,16 @@ const productSlice = createSlice({
             state.isLoading= false
         });
         builder.addCase(deleteProduct.rejected,(state,action)=>{
+            state.isLoading= false,
+            state.error= action.payload.message
+        });
+        builder.addCase(updateProduct.pending,(state,action)=>{
+            state.isLoading= true
+        });
+        builder.addCase(updateProduct.fulfilled,(state,action)=>{
+            state.isLoading= false
+        });
+        builder.addCase(updateProduct.rejected,(state,action)=>{
             state.isLoading= false,
             state.error= action.payload.message
         });
