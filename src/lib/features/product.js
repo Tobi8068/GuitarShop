@@ -100,9 +100,10 @@ const initialState={
     topRated: [],
     searchData: [],
     singleProductData :{},
-    searchLoading:true,
+    searchLoading:false,
     isLoading:true,
     error: null,
+    searchError: null,
     status: "idle",
     totalPages: 1,
     totalProducts: 0
@@ -114,6 +115,12 @@ const productSlice = createSlice({
     reducers: {
         setSearchLoading: (state, action) => {
             state.searchLoading = action.payload;
+          },
+        setSearchData: (state, action) => {
+            state.searchData = [];
+          },
+        setSearchError: (state, action) => {
+            state.searchError = action.payload;
           },
         incrementQuantity: (state, action) => {
             const quantity = action.payload.quantity || 1; // Default to 1 if no quantity provided
@@ -198,18 +205,22 @@ const productSlice = createSlice({
         });
         builder.addCase(searchProducts.pending, (state) => {
             state.searchLoading = true;
-            state.error = null;
+            state.error = false;
+            state.searchError = false
         })
         .addCase(searchProducts.fulfilled, (state, action) => {
             state.searchLoading = false;
             state.searchData = action.payload.data;
+            state.searchError = false
         })
         .addCase(searchProducts.rejected, (state, action) => {
+            state.searchData = [];
             state.searchLoading = false;
+            state.searchError = true,
             state.error = action.payload?.message || 'An error occurred';
         });
     }
 })
 
-export const { incrementQuantity, decrementQuantity,setSearchLoading  } = productSlice.actions;
+export const { incrementQuantity, decrementQuantity,setSearchLoading,setSearchData,setSearchError  } = productSlice.actions;
 export default productSlice.reducer

@@ -3,7 +3,7 @@ import { updateProduct } from '@/lib/features/product';
 import { useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
 
-const EditProductPopup = ({ product, fetchProducts, dispatch, setProductPopup, categories, brands }) => {
+const EditProductPopup = ({ product, fetchProducts, dispatch, setProductPopup, categories, brands, currPage }) => {
     const [formData, setFormData] = useState({
         product_name: product.product_name,
         price: product.price,
@@ -32,7 +32,7 @@ const EditProductPopup = ({ product, fetchProducts, dispatch, setProductPopup, c
         const result = await dispatch(updateProduct({ id: product._id, formData:formDataToSend }));
         if (updateProduct.fulfilled.match(result)) {
             setProductPopup(false);
-            dispatch(fetchProducts({ url: 'product?limit=8' }));
+            dispatch(fetchProducts({ url: `product?limit=8&page=${currPage}` }));
             alert('Product Updated Successfully');
         } else {
             alert('Unexpected Error Occurred');

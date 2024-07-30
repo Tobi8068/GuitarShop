@@ -9,6 +9,7 @@ import Link from 'next/link';
 import FilterPopup from '@/components/Design/PopupComponent/FilterPopup';
 import ProductCardLoader from '@/components/Loader/ProductCardLoader/ProductCardLoader';
 import ProductNotFound from '@/components/Design/NotFoundComponent/ProductNotFound';
+import PageNumber from '@/components/hero/PageNumber';
 
 const page = ({ searchParams }) => {
     const [sortOrder, setSortOrder] = useState({ term: 'def', sort: 'Default' })
@@ -63,7 +64,7 @@ const page = ({ searchParams }) => {
                 <ProductNotFound />
             )}
             <div className='w-full font-semibold flex justify-center px-5 gap-2  md:px-0 md:w-3/4 md:mx-auto md:gap-3 '>
-                <PageNumber pgNos={pgNos} sortOrder={sortOrder} searchParams={searchParams} />
+                <PageNumber pgNos={pgNos} searchParams={searchParams} name='products'/>
             </div>
 
         </>
@@ -120,21 +121,5 @@ const DropDown = ({ sortProduct }) => {
         </div>
     )
 }
-
-const PageNumber = ({ pgNos, searchParams }) => {
-    const currentPage = searchParams.page ? parseInt(searchParams.page) : 1;
-
-    return (
-        <>
-            {pgNos.map((pg, index) => (
-                <Link key={index} href={`products?page=${pg}`}>
-                    <span className={`${(!searchParams.page && pg === 1) || (searchParams.page && currentPage === pg) ? 'text-red-400  dark:text-white' : ' text-gray-700 dark:text-gray-500'}`}>
-                        {pg}
-                    </span>
-                </Link>
-            ))}
-        </>
-    );
-};
 
 export default page

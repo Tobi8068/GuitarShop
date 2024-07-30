@@ -53,8 +53,8 @@ const SearchComponent = () => {
                     ) : error ? (
                         <p>{error}</p>
                     ) : searchData.length > 0 ? (
-                        searchData.map((product) => (
-                            <SearchResults product={product}  setSearchTerm={setSearchTerm}/>
+                        searchData.map((product,index) => (
+                            <SearchResults key={index} product={product}  setSearchTerm={setSearchTerm}/>
                         ))
                     ) : (
                         <p>No results found</p>
