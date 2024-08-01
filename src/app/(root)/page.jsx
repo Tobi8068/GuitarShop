@@ -38,7 +38,7 @@ const page = () => {
       {/* Trending Component  */}
       {/* Deal of the day  */}
       <div className="w-full mt-4 md:my-6 px-5 md:px-0 md:w-3/4 md:mx-auto">
-        <h1 className='font-bold text-xl text-gray-600 dark:text-gray-300 md:text-2xl'>Deal of the Day</h1>
+        <h1 className='font-bold text-xl text-gray-600 dark:text-gray-300 md:text-2xl'>Latest Products</h1>
       </div>
       <div className="w-full mt-3 px-5 md:px-3  md:w-3/4 md:mx-auto">
         <ProductListSlider products={products} />    
