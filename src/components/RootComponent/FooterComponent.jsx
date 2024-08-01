@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const FooterComponent = () => {
@@ -6,34 +7,62 @@ const FooterComponent = () => {
       <div className="mx-auto w-full max-w-screen-xl p-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <a href="https://flowbite.com/" className="flex items-center">
+            <Link href="/" className="flex items-center">
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                 GuitarShop
               </span>
               <img src="/logo.png" className="w-14 h-10 object-cover" />
-            </a>
+            </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                Guitars
+                GuitarShop
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="https://flowbite.com/" className="hover:underline">
-                    Acoustic
-                  </a>
+                  <Link href="/" className="hover:underline">
+                    Home
+                  </Link>
                 </li>
                 <li className="mb-4">
-                  <a href="https://tailwindcss.com/" className="hover:underline">
-                    Electric
-                  </a>
+                  <Link href="about" className="hover:underline">
+                    About
+                  </Link>
+                </li>
+                <li className="mb-4">
+                  <Link href="services" className="hover:underline">
+                    Services
+                  </Link>
                 </li>
                 <li>
-                  <a href="https://tailwindcss.com/" className="hover:underline">
-                    Bass
-                  </a>
+                  <Link href="products" className="hover:underline">
+                    Products
+                  </Link>
                 </li>
+              </ul>
+            </div>
+            <div>
+              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                Profile
+              </h2>
+              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <li className="mb-4">
+                  <Link href="profile" className="hover:underline">
+                    Profile
+                  </Link>
+                </li>
+                <li className="mb-4">
+                  <Link href="cart" className="hover:underline">
+                    Cart
+                  </Link>
+                </li>
+                <li>
+                  <Link href="wishlist" className="hover:underline">
+                    Wishlist
+                  </Link>
+                </li>
+                
               </ul>
             </div>
             <div>
@@ -55,23 +84,6 @@ const FooterComponent = () => {
                     className="hover:underline"
                   >
                     Instagram
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                Legal
-              </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:underline">
-                    Terms &amp; Conditions
                   </a>
                 </li>
               </ul>
@@ -160,7 +172,7 @@ const FooterComponent = () => {
               </svg>
               <span className="sr-only">GitHub account</span>
             </a>
-            
+
           </div>
         </div>
       </div>
