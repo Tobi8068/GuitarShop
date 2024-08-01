@@ -49,10 +49,13 @@ const ProductDetails = ({ params }) => {
                             {data.description}
                         </p>
                         <ProductRating product={data} />
-                        <h2 className="font-semibold text-lg mb-1">Price: ${data.price}</h2>
+                        <h2 className="font-semibold text-lg mb-1">Price: Rs.{data.price}</h2>
                         <h2 className="font-semibold text-lg mb-1">Quantity: {data.quantity}</h2>
-                        <h2 className="dark:text-gray-400 font-semibold text-lg mb-3">
+                        <h2 className="dark:text-gray-400 font-semibold text-lg mb-1">
                             Category: {capitalizeFirstLetter(data.category_id.category_name)}
+                        </h2>
+                        <h2 className="dark:text-gray-400 font-semibold text-lg mb-3">
+                            Brand: {capitalizeFirstLetter(data.brand_id.brand_name)}
                         </h2>
                          <div className="flex items-center gap-2 mb-3">
                             <button
