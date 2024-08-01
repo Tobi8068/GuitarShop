@@ -1,7 +1,5 @@
 import RatingStars from "@/components/hero/RatingStars";
-import AddToCartBtn2 from "../../hero/AddToCartBtn2";
 import Link from "next/link";
-import OutOfStockComponent from "@/components/hero/OutOfStockComponent";
 
 const ProductCard2 = ({ product }) => {
     return (
@@ -24,7 +22,7 @@ const ProductCard2Img = ({ product }) => {
 const ProductCard2Content = ({ product }) => {
     return (
         <div className="p-3 md:p-5 md:w-3/5">
-            <ProductCard2Rating product={product} />
+            {/* <ProductCard2Rating product={product} /> */}
             <ProductCard2Info product={product} />
         </div>
     )
@@ -50,7 +48,7 @@ const ProductCard2Info = ({ product }) => {
             <p className="font-semibold text-gray-500 dark:text-gray-400">
                 {product.description}
             </p>
-            <h2 className="text-lg font-bold my-3 text-red-600 ">$ {product.price}</h2>
+            <h2 className="text-lg font-bold my-3 text-red-600 ">Rs. {product.price}</h2>
             {/* {product.quantity == 0 ? (
                 <OutOfStockComponent />
             ) : (
